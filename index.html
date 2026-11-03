@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WinterTray – Téli asztali hóesés Windows 10 és 11 rendszerekre</title>
+  <meta name="description" content="Könnyed, tálcáról futó téli asztali hóesés alkalmazás Windows 10 és Windows 11 rendszerekre. Valós időben követi a nyitott ablakokat, természetes hóréteggel és jégcsapokkal.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="snow-canvas" aria-hidden="true"></canvas>
+
+  <main class="container">
+    <!-- 1. Fejléc (Hero) és Letöltés -->
+    <header class="hero card">
+      <div class="badge">Windows 10 / 11 (64-bit)</div>
+      <h1>WinterTray</h1>
+      <p class="lead">
+        Könnyed, tálcáról (system tray) futó téli asztali hóesés alkalmazás Windows 10 és Windows 11 rendszerekre.
+        Valós időben követi a nyitott ablakokat, amelyek tetején természetes hóréteg és jégcsapok képződnek.
+      </p>
+      <div class="download-box">
+        <a id="main-download-btn" href="#" class="btn-download" download>
+          <svg class="icon-download" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Telepítő letöltése</span>
+        </a>
+        <div id="current-version-info" class="version-meta">
+          Verzió betöltése...
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. Főbb funkciók -->
+    <section class="section card">
+      <h2>Főbb funkciók</h2>
+      <ul class="feature-list">
+        <li>
+          <span class="bullet">❄</span>
+          <span>Valósághű, 120 FPS-es asztali hóesés több hópehely-stílussal és szél-effekttel.</span>
+        </li>
+        <li>
+          <span class="bullet">❄</span>
+          <span>Hófelhalmozódás a nyitott ablakok felső peremén és a tálcán, a Windows 11 lekerekített sarkaihoz igazodva.</span>
+        </li>
+        <li>
+          <span class="bullet">❄</span>
+          <span>Fizikai tehetetlenség: ablakmozgatáskor és átméretezéskor a hó természetesen leporzik/lehullik, az egérkurzorral pedig lesöpörhető.</span>
+        </li>
+        <li>
+          <span class="bullet">❄</span>
+          <span>Növekvő, kattintással széttörhető jégcsapok és olvadási/csepegési effekt.</span>
+        </li>
+        <li>
+          <span class="bullet">❄</span>
+          <span>Tálcaikonról elérhető magyar nyelvű beállítások, automatikus szüneteltetés teljes képernyős alkalmazásoknál (0% háttérterhelés).</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 3. Rendszerkövetelmények -->
+    <section class="section card">
+      <h2>Rendszerkövetelmények</h2>
+      <div class="specs-grid">
+        <div class="spec-item">
+          <span class="spec-label">Operációs rendszer</span>
+          <span class="spec-value">Windows 10 vagy Windows 11 (64-bit)</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Keretrendszer</span>
+          <span class="spec-value">.NET 8.0 Desktop Runtime</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Erőforrásigény</span>
+          <span class="spec-value">Minimális CPU/GPU használat (hardveresen gyorsított megjelenítés)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Verziótörténet / Frissítési jegyzék -->
+    <section class="section card">
+      <h2>Frissítési jegyzék (Changelog)</h2>
+      <div id="changelog-list" class="changelog-list">
+        <p class="loading-text">Frissítési jegyzék betöltése...</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>WinterTray &middot; Windows asztali hóesés alkalmazás</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

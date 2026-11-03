@@ -1,0 +1,6 @@
+- Első nyilvános kiadás (Windows 10 és Windows 11 támogatás)
+- 120 FPS-es hardveresen gyorsított asztali hóesés és szél-effekt
+- Hófelhalmozódás a nyitott ablakok tetején és a tálcán
+- Fizikai tehetetlenség ablakmozgatáskor és egérrel történő lesöprés
+- Növekvő, lekattintható jégcsapok és olvadási effekt
+- Magyar nyelvű tálcamenü és automatikus szüneteltetés teljes képernyős alkalmazásoknál

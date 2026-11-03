@@ -1,0 +1,34 @@
+{
+  "latest": {
+    "version": "v1.0",
+    "rawVersion": "1.0",
+    "file": "WinterTray-Setup-v1.0.exe",
+    "url": "releases/WinterTray-Setup-v1.0.exe",
+    "date": "2026-11-03",
+    "changes": [
+      "Első nyilvános kiadás (Windows 10 és Windows 11 támogatás)",
+      "120 FPS-es hardveresen gyorsított asztali hóesés és szél-effekt",
+      "Hófelhalmozódás a nyitott ablakok tetején és a tálcán",
+      "Fizikai tehetetlenség ablakmozgatáskor és egérrel történő lesöprés",
+      "Növekvő, lekattintható jégcsapok és olvadási effekt",
+      "Magyar nyelvű tálcamenü és automatikus szüneteltetés teljes képernyős alkalmazásoknál"
+    ]
+  },
+  "releases": [
+    {
+      "version": "v1.0",
+      "rawVersion": "1.0",
+      "file": "WinterTray-Setup-v1.0.exe",
+      "url": "releases/WinterTray-Setup-v1.0.exe",
+      "date": "2026-11-03",
+      "changes": [
+        "Első nyilvános kiadás (Windows 10 és Windows 11 támogatás)",
+        "120 FPS-es hardveresen gyorsított asztali hóesés és szél-effekt",
+        "Hófelhalmozódás a nyitott ablakok tetején és a tálcán",
+        "Fizikai tehetetlenség ablakmozgatáskor és egérrel történő lesöprés",
+        "Növekvő, lekattintható jégcsapok és olvadási effekt",
+        "Magyar nyelvű tálcamenü és automatikus szüneteltetés teljes képernyős alkalmazásoknál"
+      ]
+    }
+  ]
+}

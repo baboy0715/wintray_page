@@ -1,0 +1,9 @@
+{
+  "name": "wintertray-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WinterTray letöltő weboldal",
+  "scripts": {
+    "build": "node build.js"
+  }
+}
