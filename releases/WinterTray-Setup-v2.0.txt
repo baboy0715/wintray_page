@@ -1,0 +1,10 @@
+-Új őszi évszak mód (Autumn Mode): egyetlen kattintással váltható téli havazás és őszi hangulat a tálcamenüből és a Beállítások ablakból.
+-Szinuszos őszi falevél hullás: 3 egyedi levélfajta (juhar, tölgy, nyír) és 4 őszi színárnyalat (narancs, aranybarna, vörös, alkonyat) valósághű lebegéssel és finom forgással.
+-Fizikai ablakra tapadás: a levelek pontosan a becsapódási szögükben és formájukban fekszenek rá a nyitott ablakok felső szegélyére, garantált megüléssel.
+-Interaktív egérkurzoros lesöprés: a megült levelek a kurzor érintésére valósághű lendületet kapva lerepülnek az ablakról és hullanak tovább.
+-Hangulatos őszi esőzés és csobbanás: finom, dőlt esőcsíkok és mikrocsobbanó ripple-effektus az ablakok felső lécén és az asztalon (a csobbanások a falevelek alá rétegezve).
+-Ultra sima, analóg elhalványulás: a megült levelek 120 FPS-es, akadásmentes fade out animációval tűnnek el, állítható élettartammal (vagy végtelen tartózkodással).
+-Tálca-beállítások testreszabása: külön szabályozható, hogy a levelek és az eső ráüljenek-e a Windows tálcára, vagy elegánsan a tálca mögé hullva tűnjenek el.
+-Hóvastagság korlát opció téli módban: tetszés szerint kikapcsolható a hó maximális vastagsági korlátja, így tetszőleges vastagságú hótakaró képződhet.
+-Évszakhoz illeszkedő háttérkép támogatás: automatikus háttérkép-váltás a téli és az őszi hangulatú asztali háttér között.
+-Memória- és teljesítmény-optimalizáció: zéró felesleges memóriaallokáció, zárt populációvezérlés, 120 FPS folyamatosság és 0% terhelés teljes képernyős játékok alatt.

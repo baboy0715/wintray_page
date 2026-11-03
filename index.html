@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="hu" data-season="winter">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WinterTray – Téli asztali hóesés Windows 10 és 11 rendszerekre</title>
-  <meta name="description" content="Könnyed, tálcáról futó téli asztali hóesés alkalmazás Windows 10 és Windows 11 rendszerekre. Valós időben követi a nyitott ablakokat, természetes hóréteggel és jégcsapokkal. Töltsd le ingyen!">
-  <meta name="keywords" content="WinterTray, Windows hóesés, asztali hóesés, hóesés effekt Windows, Windows 11 hóesés, Windows 10 hóeffekt, asztali téli háttér, desktop snow app, letöltés, ingyenes">
+  <title>WinterTray – Téli hóesés és Őszi falevélhullás Windows 10 és 11 rendszerekre</title>
+  <meta name="description" content="Könnyed, tálcáról futó téli és őszi asztali hangulat-alkalmazás Windows 10 és Windows 11 rendszerekre. Valós időben követi a nyitott ablakokat természetes hóréteggel, jégcsapokkal, hulló falevelekkel és esővel.">
+  <meta name="keywords" content="WinterTray, Windows hóesés, őszi falevél effekt, asztali hóesés, hóesés effekt Windows, Windows 11 hóesés, Windows 10 hóeffekt, asztali téli háttér, őszi háttér, desktop snow app, letöltés, ingyenes">
   <meta name="author" content="WinterTray">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <meta name="theme-color" content="#070d19">
+  <meta name="theme-color" id="meta-theme-color" content="#070d19">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -16,14 +16,14 @@
   <!-- Open Graph / Facebook / Discord preview -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="hu_HU">
-  <meta property="og:title" content="WinterTray – Téli asztali hóesés Windows 10 és 11 rendszerekre">
-  <meta property="og:description" content="Valósághű, 120 FPS-es asztali hóesés, dinamikus ablakkeret-hófelhalmozódás és jégcsapok Windows 10 és 11-re. Töltsd le a hivatalos telepítőt!">
+  <meta property="og:title" content="WinterTray – Téli hóesés és Őszi falevélhullás Windows 10 és 11 rendszerekre">
+  <meta property="og:description" content="Valósághű, 120 FPS-es asztali hóesés, jégcsapok, valamint őszi falevélhullás és esőzés Windows 10 és 11-re. Töltsd le a hivatalos telepítőt!">
   <meta property="og:site_name" content="WinterTray">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="WinterTray – Téli asztali hóesés Windows 10 és 11 rendszerekre">
-  <meta name="twitter:description" content="Valósághű, 120 FPS-es asztali hóesés, dinamikus ablakkeret-hófelhalmozódás és jégcsapok Windows 10 és 11-re.">
+  <meta name="twitter:title" content="WinterTray – Téli hóesés és Őszi falevélhullás Windowsra">
+  <meta name="twitter:description" content="Valósághű, 120 FPS-es asztali hóesés, jégcsapok, valamint őszi falevélhullás és esőzés Windows 10 és 11-re.">
 
   <!-- Strukturált adatok a Google kereső számára (Schema.org JSON-LD) -->
   <script type="application/ld+json">
@@ -33,14 +33,14 @@
     "name": "WinterTray",
     "operatingSystem": "Windows 10, Windows 11 (64-bit)",
     "applicationCategory": "DesktopEnhancementApplication",
-    "softwareVersion": "1.0",
-    "description": "Könnyed, tálcáról futó téli asztali hóesés alkalmazás Windows 10 és Windows 11 rendszerekre valós idejű ablakfelismeréssel, természetes hóréteggel és jégcsapokkal.",
+    "softwareVersion": "2.0",
+    "description": "Könnyed, tálcáról futó téli és őszi asztali hangulat-alkalmazás Windows 10 és Windows 11 rendszerekre valós idejű ablakfelismeréssel, természetes hóréteggel, jégcsapokkal, őszi falevelekkel és esőzéssel.",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "HUF"
     },
-    "downloadUrl": "https://wintray_page.pages.dev/releases/WinterTray-Setup-v1.0.exe"
+    "downloadUrl": "https://wintray_page.pages.dev/releases/WinterTray-Setup-v2.0.exe"
   }
   </script>
 
@@ -58,13 +58,28 @@
   </a>
 
   <main class="container">
+    <!-- Évszak-választó navigációs fejléc (Season Switcher) -->
+    <nav class="top-nav" aria-label="Évszak téma választó">
+      <div class="season-switcher" role="group" aria-label="Évszak választó">
+        <button type="button" class="season-btn active" data-season-target="winter" aria-pressed="true">
+          <span class="season-icon" aria-hidden="true">❄️</span>
+          <span>Tél</span>
+        </button>
+        <button type="button" class="season-btn" data-season-target="autumn" aria-pressed="false">
+          <span class="season-icon" aria-hidden="true">🍂</span>
+          <span>Ősz</span>
+          <span class="season-new-badge">ÚJ</span>
+        </button>
+      </div>
+    </nav>
+
     <!-- 1. Fejléc (Hero) és Letöltés -->
     <header class="hero card">
-      <div class="badge">Windows 10 / 11 (64-bit)</div>
+      <div class="badge" id="hero-badge">Windows 10 / 11 (64-bit) • Téli és Őszi mód</div>
       <h1>WinterTray</h1>
       <p class="lead">
-        Könnyed, tálcáról (system tray) futó téli asztali hóesés alkalmazás Windows 10 és Windows 11 rendszerekre.
-        Valós időben követi a nyitott ablakokat, amelyek tetején természetes hóréteg és jégcsapok képződnek.
+        Könnyed, tálcáról (system tray) futó téli és őszi asztali hangulat-alkalmazás Windows 10 és Windows 11 rendszerekre.
+        Valós időben követi a nyitott ablakokat, amelyek tetején természetes hóréteg és jégcsapok, vagy őszi módban hulló falevelek és esőcseppek képződnek.
       </p>
 
       <div class="hero-actions-container">
@@ -103,24 +118,24 @@
       <h2>Főbb funkciók</h2>
       <ul class="feature-list">
         <li>
-          <span class="bullet">❄</span>
-          <span>Valósághű, 120 FPS-es asztali hóesés több hópehely-stílussal és szél-effekttel.</span>
+          <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
+          <span><strong>Téli és Őszi évszak mód:</strong> egyetlen kattintással váltható téli havazás és őszi hangulat a tálcamenüből, automatikus asztali háttérkép-váltással.</span>
         </li>
         <li>
-          <span class="bullet">❄</span>
-          <span>Hófelhalmozódás a nyitott ablakok felső peremén és a tálcán, a Windows 11 lekerekített sarkaihoz igazodva.</span>
+          <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
+          <span><strong>Szinuszos falevélhullás és őszi esőzés:</strong> 3 egyedi levélfajta (juhar, tölgy, nyír) 4 őszi színárnyalatban, finom dőlt esőcsíkokkal és mikrocsobbanó (ripple) effekttel.</span>
         </li>
         <li>
-          <span class="bullet">❄</span>
-          <span>Fizikai tehetetlenség: ablakmozgatáskor és átméretezéskor a hó természetesen leporzik/lehullik, az egérkurzorral pedig lesöpörhető.</span>
+          <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
+          <span><strong>Valósághű, 120 FPS-es asztali hóesés:</strong> több hópehely-stílus, szél-effekt, kikapcsolható hóvastagság-korlát, valamint növekvő, kattintással széttörhető jégcsapok.</span>
         </li>
         <li>
-          <span class="bullet">❄</span>
-          <span>Növekvő, kattintással széttörhető jégcsapok és olvadási/csepegési effekt.</span>
+          <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
+          <span><strong>Fizikai ablakra tapadás és lesöprés:</strong> a hó és a falevelek a nyitott ablakok felső peremén és a tálcán ülnek meg, ablakmozgatáskor lehullanak, az egérkurzorral pedig lesöpörhetők.</span>
         </li>
         <li>
-          <span class="bullet">❄</span>
-          <span>Tálcaikonról elérhető magyar nyelvű beállítások, automatikus szüneteltetés teljes képernyős alkalmazásoknál (0% háttérterhelés).</span>
+          <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
+          <span><strong>Magyar nyelvű beállítások és 0% játékterhelés:</strong> testreszabható tálca-interakció, analóg 120 FPS-es elhalványulás és automatikus szüneteltetés teljes képernyős alkalmazásoknál.</span>
         </li>
       </ul>
     </section>
@@ -164,7 +179,7 @@
     </section>
 
     <footer class="footer">
-      <p>WinterTray &middot; Windows asztali hóesés alkalmazás</p>
+      <p>WinterTray &middot; Téli és őszi Windows asztali hangulat-alkalmazás</p>
     </footer>
   </main>
 
