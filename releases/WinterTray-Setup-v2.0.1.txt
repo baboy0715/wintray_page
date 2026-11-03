@@ -1,0 +1,1 @@
+-Visszajelzés és hibabejelentő űrlap link hozzáadása a tálcamenühöz és a Beállítások ablakhoz
