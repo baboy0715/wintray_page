@@ -9,12 +9,18 @@
   --accent: #56b4fc;
   --accent-hover: #7bc5fe;
   --accent-dark: #061326;
+  --row-bg: rgba(10, 20, 38, 0.7);
+  --row-border: rgba(148, 197, 248, 0.14);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html, body {
@@ -38,12 +44,41 @@ html, body {
   z-index: 0;
 }
 
+/* Lebegő visszajelzés gomb (jobb lent) */
+.floating-feedback-pill {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 32, 60, 0.9);
+  color: var(--accent);
+  border: 1px solid rgba(86, 180, 252, 0.4);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.floating-feedback-pill:hover {
+  transform: translateY(-2px);
+  background: rgba(22, 45, 84, 0.95);
+  border-color: var(--accent-hover);
+  color: #ffffff;
+}
+
 .container {
   position: relative;
   z-index: 1;
-  max-width: 780px;
+  max-width: 820px;
   margin: 0 auto;
-  padding: 48px 20px 64px;
+  padding: 44px 20px 80px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -62,7 +97,7 @@ html, body {
 /* Hero Section */
 .hero {
   text-align: center;
-  padding: 44px 32px;
+  padding: 42px 32px;
 }
 
 .badge {
@@ -89,15 +124,23 @@ h1 {
 .lead {
   font-size: 1.08rem;
   color: var(--text-secondary);
-  max-width: 620px;
-  margin: 0 auto 28px;
+  max-width: 640px;
+  margin: 0 auto 26px;
 }
 
-.download-box {
+.hero-actions-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+}
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .btn-download {
@@ -107,10 +150,10 @@ h1 {
   gap: 10px;
   background: var(--accent);
   color: var(--accent-dark);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   font-weight: 600;
   text-decoration: none;
-  padding: 14px 30px;
+  padding: 13px 26px;
   border-radius: 10px;
   transition: background-color 0.18s ease, transform 0.15s ease;
 }
@@ -120,8 +163,26 @@ h1 {
   transform: translateY(-1px);
 }
 
-.btn-download:active {
-  transform: translateY(0);
+.btn-feedback-hero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(86, 180, 252, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(86, 180, 252, 0.35);
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 13px 22px;
+  border-radius: 10px;
+  transition: all 0.18s ease;
+}
+
+.btn-feedback-hero:hover {
+  background: rgba(86, 180, 252, 0.22);
+  border-color: var(--accent);
+  transform: translateY(-1px);
 }
 
 .version-meta {
@@ -137,6 +198,185 @@ h2 {
   margin-bottom: 18px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(148, 197, 248, 0.12);
+}
+
+/* =========================================
+   OptiFine stílusú letöltési sorok és leugrók
+   ========================================= */
+.releases-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.release-group-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+
+.release-card-row {
+  background: var(--row-bg);
+  border: 1px solid var(--row-border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.release-card-row:hover {
+  border-color: rgba(148, 197, 248, 0.28);
+}
+
+.release-main-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.release-info-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.release-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.badge-latest {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(86, 180, 252, 0.15);
+  border: 1px solid rgba(86, 180, 252, 0.35);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.release-date {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+.release-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-optifine-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #2a558c;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 7px 16px;
+  border-radius: 6px;
+  transition: background-color 0.15s ease;
+}
+
+.btn-optifine-download:hover {
+  background: #3970b5;
+}
+
+.btn-toggle-changelog {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+}
+
+.btn-toggle-changelog:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.btn-toggle-changelog .arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  font-size: 0.75rem;
+}
+
+.btn-toggle-changelog.active .arrow {
+  transform: rotate(180deg);
+}
+
+/* Leugró / lenyitható változáslista */
+.release-changelog-drawer {
+  display: none;
+  padding: 14px 20px 18px;
+  background: rgba(6, 14, 28, 0.6);
+  border-top: 1px solid rgba(148, 197, 248, 0.1);
+}
+
+.release-changelog-drawer.open {
+  display: block;
+}
+
+.changelog-changes {
+  list-style: disc;
+  padding-left: 20px;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Korábbi verziók kinyitó gombja (OptiFine + More / Show all versions stílus) */
+.toggle-older-container {
+  text-align: center;
+  padding-top: 8px;
+}
+
+.btn-show-all-versions {
+  background: transparent;
+  border: 1px dashed rgba(86, 180, 252, 0.3);
+  color: var(--accent);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.btn-show-all-versions:hover {
+  background: rgba(86, 180, 252, 0.08);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.older-releases-list {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.older-releases-list.open {
+  display: flex;
 }
 
 /* Feature List */
@@ -170,7 +410,7 @@ h2 {
 }
 
 .spec-item {
-  background: rgba(10, 20, 38, 0.55);
+  background: var(--row-bg);
   border: 1px solid rgba(148, 197, 248, 0.1);
   border-radius: 10px;
   padding: 14px 16px;
@@ -192,95 +432,71 @@ h2 {
   color: var(--text-primary);
 }
 
-/* Changelog */
-.changelog-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+/* =========================================
+   Kisebb, feltűnő visszajelzés kártya
+   ========================================= */
+.feedback-card {
+  border: 1px solid rgba(86, 180, 252, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 16px rgba(86, 180, 252, 0.08);
 }
 
-.changelog-item {
-  background: rgba(10, 20, 38, 0.55);
-  border: 1px solid rgba(148, 197, 248, 0.12);
-  border-radius: 10px;
-  padding: 18px 20px;
-}
-
-.changelog-header {
+.feedback-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
-.changelog-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.feedback-header h2 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
-.changelog-version {
-  font-size: 1.08rem;
-  font-weight: 700;
-  color: #ffffff;
+.feedback-badge {
+  background: rgba(86, 180, 252, 0.18);
+  border-color: rgba(86, 180, 252, 0.45);
+  margin-bottom: 8px;
 }
 
-.changelog-latest-tag {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--accent);
-  background: rgba(86, 180, 252, 0.14);
-  border: 1px solid rgba(86, 180, 252, 0.3);
-  padding: 2px 8px;
-  border-radius: 6px;
-}
-
-.changelog-download {
-  font-size: 0.88rem;
-  font-weight: 500;
+.feedback-external-link {
+  font-size: 0.85rem;
   color: var(--accent);
   text-decoration: none;
+  font-weight: 500;
 }
 
-.changelog-download:hover {
-  color: var(--accent-hover);
+.feedback-external-link:hover {
   text-decoration: underline;
 }
 
-.changelog-changes {
-  list-style: disc;
-  padding-left: 20px;
+.feedback-intro {
   color: var(--text-secondary);
-  font-size: 0.94rem;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+.feedback-frame-wrapper {
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(148, 197, 248, 0.25);
+}
+
+.feedback-frame-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
 }
 
 .loading-text {
   color: var(--text-muted);
   font-size: 0.94rem;
-}
-
-/* Feedback section */
-.feedback-intro {
-  color: var(--text-secondary);
-  font-size: 0.96rem;
-  margin-bottom: 20px;
-}
-
-.feedback-frame-wrapper {
-  width: 100%;
-  overflow: hidden;
-  border-radius: 16px;
-  background: #ffffff;
-}
-
-.feedback-frame-wrapper iframe {
-  width: 100%;
-  display: block;
 }
 
 /* Footer */
@@ -291,20 +507,46 @@ h2 {
   padding-top: 8px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .container {
-    padding: 28px 14px 44px;
+    padding: 24px 14px 60px;
   }
 
   .card, .hero {
-    padding: 24px 20px;
+    padding: 22px 18px;
   }
 
   h1 {
     font-size: 2.1rem;
   }
 
-  .btn-download {
+  .hero-buttons {
+    flex-direction: column;
     width: 100%;
+  }
+
+  .btn-download, .btn-feedback-hero {
+    width: 100%;
+  }
+
+  .release-main-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .release-actions-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .floating-feedback-pill {
+    bottom: 16px;
+    right: 16px;
+    font-size: 0.82rem;
+    padding: 8px 14px;
+  }
+
+  .feedback-frame-wrapper {
+    height: 440px;
   }
 }

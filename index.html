@@ -10,6 +10,14 @@
 <body>
   <canvas id="snow-canvas" aria-hidden="true"></canvas>
 
+  <!-- Lebegő visszajelzés gomb a képernyő jobb alján -->
+  <a href="#feedback" class="floating-feedback-pill" title="Ugrás a visszajelzéshez">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    <span>Vélemény / Hibabejelentés</span>
+  </a>
+
   <main class="container">
     <!-- 1. Fejléc (Hero) és Letöltés -->
     <header class="hero card">
@@ -19,22 +27,39 @@
         Könnyed, tálcáról (system tray) futó téli asztali hóesés alkalmazás Windows 10 és Windows 11 rendszerekre.
         Valós időben követi a nyitott ablakokat, amelyek tetején természetes hóréteg és jégcsapok képződnek.
       </p>
-      <div class="download-box">
-        <a id="main-download-btn" href="#" class="btn-download" download>
-          <svg class="icon-download" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-          <span>Telepítő letöltése</span>
-        </a>
+
+      <div class="hero-actions-container">
+        <div class="hero-buttons">
+          <a id="main-download-btn" href="#" class="btn-download" download>
+            <svg class="icon-download" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Telepítő letöltése</span>
+          </a>
+          <a href="#feedback" class="btn-feedback-hero">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Véleményt írok / Hibát jelentek</span>
+          </a>
+        </div>
         <div id="current-version-info" class="version-meta">
           Verzió betöltése...
         </div>
       </div>
     </header>
 
-    <!-- 2. Főbb funkciók -->
+    <!-- 2. Letöltések és Frissítési jegyzék (OptiFine stílusú leugró lista) -->
+    <section class="section card">
+      <h2>Letöltések és Verziók</h2>
+      <div id="releases-wrapper" class="releases-wrapper">
+        <p class="loading-text">Kiadások betöltése...</p>
+      </div>
+    </section>
+
+    <!-- 3. Főbb funkciók -->
     <section class="section card">
       <h2>Főbb funkciók</h2>
       <ul class="feature-list">
@@ -61,7 +86,7 @@
       </ul>
     </section>
 
-    <!-- 3. Rendszerkövetelmények -->
+    <!-- 4. Rendszerkövetelmények -->
     <section class="section card">
       <h2>Rendszerkövetelmények</h2>
       <div class="specs-grid">
@@ -80,22 +105,22 @@
       </div>
     </section>
 
-    <!-- 4. Verziótörténet / Frissítési jegyzék -->
-    <section class="section card">
-      <h2>Frissítési jegyzék (Changelog)</h2>
-      <div id="changelog-list" class="changelog-list">
-        <p class="loading-text">Frissítési jegyzék betöltése...</p>
+    <!-- 5. Kisebb, kiemelt visszajelzés és hibabejelentés szekció -->
+    <section id="feedback" class="section card feedback-card">
+      <div class="feedback-header">
+        <div>
+          <span class="badge feedback-badge">Fontos a véleményed!</span>
+          <h2>Visszajelzés és Hibabejelentés</h2>
+        </div>
+        <a href="https://qform.hu/form/wintertray-visszajelzes-funkcioertekeles-es-hibabejelentes" target="_blank" rel="noopener" class="feedback-external-link">
+          Megnyitás külön lapon ↗
+        </a>
       </div>
-    </section>
-
-    <!-- 5. Visszajelzés és hibabejelentés -->
-    <section class="section card">
-      <h2>Visszajelzés és hibabejelentés</h2>
       <p class="feedback-intro">
-        Oszd meg véleményedet, javasolj új funkciókat, vagy jelentsd be az esetleges hibákat az alábbi űrlapon!
+        Kérlek, oszd meg a tapasztalataidat, ötleteidet vagy jelentsd be a hibákat, hogy még jobbá tehessük a WinterTray-t!
       </p>
       <div class="feedback-frame-wrapper">
-        <iframe src="https://qform.hu/form/wintertray-visszajelzes-funkcioertekeles-es-hibabejelentes" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 16px; border: 1px solid rgba(0,0,0,0.1);" title="WinterTray visszajelzés és hibabejelentés">Betöltés...</iframe>
+        <iframe src="https://qform.hu/form/wintertray-visszajelzes-funkcioertekeles-es-hibabejelentes" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0" title="WinterTray visszajelzés és hibabejelentés">Betöltés...</iframe>
       </div>
     </section>
 

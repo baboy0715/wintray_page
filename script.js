@@ -70,11 +70,94 @@
   requestAnimationFrame(updateAndDraw);
 })();
 
-// 2. Automatikus verzió- és frissítési jegyzék betöltés (releases/releases.json)
+// 2. OptiFine-stílusú kompakt verziólista és leugró változásjegyzék
 (async function loadReleases() {
   const mainBtn = document.getElementById('main-download-btn');
   const versionInfo = document.getElementById('current-version-info');
-  const changelogContainer = document.getElementById('changelog-list');
+  const wrapper = document.getElementById('releases-wrapper');
+
+  function renderReleaseRow(rel, isLatest) {
+    const card = document.createElement('div');
+    card.className = 'release-card-row';
+
+    // Fő vízszintes sáv (OptiFine stílus)
+    const mainBar = document.createElement('div');
+    mainBar.className = 'release-main-bar';
+
+    const leftInfo = document.createElement('div');
+    leftInfo.className = 'release-info-left';
+
+    const name = document.createElement('span');
+    name.className = 'release-name';
+    name.textContent = `WinterTray ${rel.version}`;
+    leftInfo.appendChild(name);
+
+    if (isLatest) {
+      const badge = document.createElement('span');
+      badge.className = 'badge-latest';
+      badge.textContent = 'Legújabb';
+      leftInfo.appendChild(badge);
+    }
+
+    if (rel.date) {
+      const date = document.createElement('span');
+      date.className = 'release-date';
+      date.textContent = rel.date;
+      leftInfo.appendChild(date);
+    }
+
+    const rightActions = document.createElement('div');
+    rightActions.className = 'release-actions-right';
+
+    // Letöltés gomb
+    const dlBtn = document.createElement('a');
+    dlBtn.className = 'btn-optifine-download';
+    dlBtn.href = rel.url;
+    dlBtn.setAttribute('download', rel.file);
+    dlBtn.innerHTML = `<span>Letöltés (.exe)</span>`;
+
+    // Változások lenyitása gomb (leugró ablak/fiók)
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'btn-toggle-changelog';
+    toggleBtn.type = 'button';
+    toggleBtn.innerHTML = `<span>Változások</span> <span class="arrow">▼</span>`;
+
+    rightActions.appendChild(dlBtn);
+    rightActions.appendChild(toggleBtn);
+
+    mainBar.appendChild(leftInfo);
+    mainBar.appendChild(rightActions);
+    card.appendChild(mainBar);
+
+    // Lenyíló változáslista rész
+    const drawer = document.createElement('div');
+    drawer.className = 'release-changelog-drawer';
+
+    if (Array.isArray(rel.changes) && rel.changes.length > 0) {
+      const ul = document.createElement('ul');
+      ul.className = 'changelog-changes';
+      rel.changes.forEach(changeText => {
+        const li = document.createElement('li');
+        li.textContent = changeText;
+        ul.appendChild(li);
+      });
+      drawer.appendChild(ul);
+    } else {
+      const p = document.createElement('p');
+      p.className = 'loading-text';
+      p.textContent = 'Nincs megadva részletes változás ehhez a kiadáshoz.';
+      drawer.appendChild(p);
+    }
+
+    card.appendChild(drawer);
+
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      toggleBtn.classList.toggle('active', isOpen);
+    });
+
+    return card;
+  }
 
   try {
     const response = await fetch('releases/releases.json', { cache: 'no-cache' });
@@ -87,70 +170,54 @@
     const latest = data.latest || releases[0] || null;
 
     if (!latest) {
-      versionInfo.textContent = 'Jelenleg nincs feltöltött telepítő a releases/ mappában.';
-      changelogContainer.innerHTML = '<p class="loading-text">Még nincs elérhető kiadás.</p>';
+      versionInfo.textContent = 'Jelenleg nincs elérhető telepítő.';
+      wrapper.innerHTML = '<p class="loading-text">Még nincs feltöltött kiadás.</p>';
       return;
     }
 
-    // Fő letöltés gomb frissítése a legújabb verzióra
+    // Fő Hero gomb beállítása
     mainBtn.href = latest.url;
     mainBtn.setAttribute('download', latest.file);
-    versionInfo.textContent = `Aktuális verzió: ${latest.version} (${latest.file}) • Windows telepítő (.exe)`;
+    versionInfo.textContent = `Legújabb: ${latest.version} (${latest.file}) • Windows telepítő (.exe)`;
 
-    // Frissítési jegyzék felépítése
-    changelogContainer.innerHTML = '';
-    releases.forEach((rel, index) => {
-      const item = document.createElement('div');
-      item.className = 'changelog-item';
+    wrapper.innerHTML = '';
 
-      const header = document.createElement('div');
-      header.className = 'changelog-header';
+    // 1. Csak a legújabb verzió jelenik meg kiemelve
+    const latestCard = renderReleaseRow(latest, true);
+    wrapper.appendChild(latestCard);
 
-      const titleWrap = document.createElement('div');
-      titleWrap.className = 'changelog-title';
+    // 2. Ha vannak régebbi verziók, "+ Korábbi verziók megjelenítése" leugró alá kerülnek
+    const olderReleases = releases.slice(1);
+    if (olderReleases.length > 0) {
+      const toggleContainer = document.createElement('div');
+      toggleContainer.className = 'toggle-older-container';
 
-      const verSpan = document.createElement('span');
-      verSpan.className = 'changelog-version';
-      verSpan.textContent = `WinterTray ${rel.version}`;
-      titleWrap.appendChild(verSpan);
+      const showOlderBtn = document.createElement('button');
+      showOlderBtn.className = 'btn-show-all-versions';
+      showOlderBtn.type = 'button';
+      showOlderBtn.textContent = `+ Korábbi verziók megjelenítése (${olderReleases.length})`;
 
-      if (index === 0) {
-        const latestBadge = document.createElement('span');
-        latestBadge.className = 'changelog-latest-tag';
-        latestBadge.textContent = 'Legújabb';
-        titleWrap.appendChild(latestBadge);
-      }
+      const olderList = document.createElement('div');
+      olderList.className = 'older-releases-list';
 
-      const dlLink = document.createElement('a');
-      dlLink.className = 'changelog-download';
-      dlLink.href = rel.url;
-      dlLink.setAttribute('download', rel.file);
-      dlLink.textContent = `${rel.file} letöltése`;
+      olderReleases.forEach(rel => {
+        olderList.appendChild(renderReleaseRow(rel, false));
+      });
 
-      header.appendChild(titleWrap);
-      header.appendChild(dlLink);
-      item.appendChild(header);
+      showOlderBtn.addEventListener('click', () => {
+        const isOpen = olderList.classList.toggle('open');
+        showOlderBtn.textContent = isOpen
+          ? `- Korábbi verziók elrejtése`
+          : `+ Korábbi verziók megjelenítése (${olderReleases.length})`;
+      });
 
-      if (Array.isArray(rel.changes) && rel.changes.length > 0) {
-        const ul = document.createElement('ul');
-        ul.className = 'changelog-changes';
-        rel.changes.forEach(changeText => {
-          const li = document.createElement('li');
-          li.textContent = changeText;
-          ul.appendChild(li);
-        });
-        item.appendChild(ul);
-      } else {
-        const emptyNote = document.createElement('p');
-        emptyNote.className = 'loading-text';
-        emptyNote.textContent = 'Nincs megadva részletes változáslista ehhez a verzióhoz.';
-        item.appendChild(emptyNote);
-      }
+      toggleContainer.appendChild(showOlderBtn);
+      wrapper.appendChild(toggleContainer);
+      wrapper.appendChild(olderList);
+    }
 
-      changelogContainer.appendChild(item);
-    });
   } catch (err) {
-    versionInfo.textContent = 'Nem sikerült betölteni a verzióinformációkat.';
-    changelogContainer.innerHTML = '<p class="loading-text">A frissítési jegyzék jelenleg nem érhető el.</p>';
+    versionInfo.textContent = 'Nem sikerült betölteni a verziókat.';
+    wrapper.innerHTML = '<p class="loading-text">A kiadások listája jelenleg nem érhető el.</p>';
   }
 })();
