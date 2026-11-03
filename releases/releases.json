@@ -7,11 +7,14 @@
     "date": "2026-11-03",
     "changes": [
       "Első nyilvános kiadás (Windows 10 és Windows 11 támogatás)",
-      "120 FPS-es hardveresen gyorsított asztali hóesés és szél-effekt",
-      "Hófelhalmozódás a nyitott ablakok tetején és a tálcán",
-      "Fizikai tehetetlenség ablakmozgatáskor és egérrel történő lesöprés",
-      "Növekvő, lekattintható jégcsapok és olvadási effekt",
-      "Magyar nyelvű tálcamenü és automatikus szüneteltetés teljes képernyős alkalmazásoknál"
+      "120 FPS-es, hardveresen gyorsított asztali hóesés és állítható szélfizika",
+      "Dinamikus hófelhalmozódás a nyitott ablakok tetején és a tálcán",
+      "Windows 11 lekerekített ablakkereteinek pontos lekövetése",
+      "Fizikai tehetetlenség: ablakmozgatáskor természetesen leporzó hó",
+      "Egérkurzorral lesöpörhető hóréteg",
+      "Növekvő, kattintással széttörhető jégcsapok és olvadási/csepegési effekt",
+      "Magyar nyelvű tálcamenü (system tray)",
+      "Automatikus szüneteltetés teljes képernyős alkalmazásoknál és játékoknál (0% terhelés)"
     ]
   },
   "releases": [
@@ -23,11 +26,14 @@
       "date": "2026-11-03",
       "changes": [
         "Első nyilvános kiadás (Windows 10 és Windows 11 támogatás)",
-        "120 FPS-es hardveresen gyorsított asztali hóesés és szél-effekt",
-        "Hófelhalmozódás a nyitott ablakok tetején és a tálcán",
-        "Fizikai tehetetlenség ablakmozgatáskor és egérrel történő lesöprés",
-        "Növekvő, lekattintható jégcsapok és olvadási effekt",
-        "Magyar nyelvű tálcamenü és automatikus szüneteltetés teljes képernyős alkalmazásoknál"
+        "120 FPS-es, hardveresen gyorsított asztali hóesés és állítható szélfizika",
+        "Dinamikus hófelhalmozódás a nyitott ablakok tetején és a tálcán",
+        "Windows 11 lekerekített ablakkereteinek pontos lekövetése",
+        "Fizikai tehetetlenség: ablakmozgatáskor természetesen leporzó hó",
+        "Egérkurzorral lesöpörhető hóréteg",
+        "Növekvő, kattintással széttörhető jégcsapok és olvadási/csepegési effekt",
+        "Magyar nyelvű tálcamenü (system tray)",
+        "Automatikus szüneteltetés teljes képernyős alkalmazásoknál és játékoknál (0% terhelés)"
       ]
     }
   ]
