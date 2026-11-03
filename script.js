@@ -18,6 +18,16 @@ function setStoredSeason(val) {
 
 let currentSeason = getStoredSeason();
 
+// SmartScreen segítség lenyitása / becsukása
+window.toggleSmartScreenHelp = function() {
+  const content = document.getElementById('smartscreen-content');
+  const btn = document.getElementById('smartscreen-btn');
+  if (!content || !btn) return;
+  const isOpen = content.classList.toggle('open');
+  btn.classList.toggle('active', isOpen);
+  btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+};
+
 // Globálisan elérhető évszakváltó függvény
 window.setSeason = function(season) {
   currentSeason = season === 'autumn' ? 'autumn' : 'winter';

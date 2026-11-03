@@ -44,7 +44,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="style.css?v=2.2">
+  <link rel="stylesheet" href="style.css?v=2.3">
 </head>
 <body>
   <canvas id="snow-canvas" aria-hidden="true"></canvas>
@@ -101,6 +101,37 @@
         </div>
         <div id="current-version-info" class="version-meta">
           Verzió betöltése...
+        </div>
+
+        <!-- SmartScreen segítség doboz -->
+        <div class="smartscreen-box">
+          <button type="button" class="smartscreen-toggle-btn" id="smartscreen-btn" onclick="toggleSmartScreenHelp()" aria-expanded="false">
+            <span class="smartscreen-btn-left">
+              <span class="smartscreen-icon" aria-hidden="true">🛡️</span>
+              <span>„A Windows megvédte a számítógépét” ablak jelenik meg?</span>
+            </span>
+            <span class="smartscreen-arrow">▼</span>
+          </button>
+          <div id="smartscreen-content" class="smartscreen-content">
+            <div class="smartscreen-inner">
+              <div class="smartscreen-badge">100% Biztonságos &amp; Kártevőmentes</div>
+              <p class="smartscreen-desc">
+                A <strong>WinterTray</strong> egy független, nyílt forráskódú fejlesztés. A Windows Defender SmartScreen minden olyan frissen kiadott telepítőnél automatikusan megjeleníti ezt a kék védelmi ablakot, amely még nem rendelkezik évi többszázezer forintos nagyvállalati digitális tanúsítvánnyal.
+              </p>
+              <div class="smartscreen-steps-wrap">
+                <span class="smartscreen-steps-title">Megoldás 2 kattintással a telepítés elindításához:</span>
+                <ol class="smartscreen-steps-list">
+                  <li>Kattints a kék ablakban az aláhúzott <strong>„További információ”</strong> linkre.</li>
+                  <li>Kattints a jobb alsó sarokban megjelenő <strong>„Futtatás mindenképpen”</strong> gombra.</li>
+                </ol>
+                <div class="smartscreen-demo-bar">
+                  <span class="demo-link">1. További információ</span>
+                  <span class="demo-arrow">➔</span>
+                  <span class="demo-btn">2. Futtatás mindenképpen</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -183,6 +214,6 @@
     </footer>
   </main>
 
-  <script src="script.js?v=2.2"></script>
+  <script src="script.js?v=2.3"></script>
 </body>
 </html>

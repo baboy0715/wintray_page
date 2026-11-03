@@ -327,6 +327,160 @@ h1 {
   color: var(--text-muted);
 }
 
+/* =========================================
+   SmartScreen segítség doboz
+   ========================================= */
+.smartscreen-box {
+  width: 100%;
+  max-width: 640px;
+  margin-top: 10px;
+  background: rgba(10, 20, 38, 0.65);
+  border: 1px solid var(--accent-soft-border);
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: left;
+  transition: all 0.25s ease;
+}
+
+html[data-season="autumn"] .smartscreen-box,
+body[data-season="autumn"] .smartscreen-box {
+  background: rgba(24, 13, 7, 0.72);
+}
+
+.smartscreen-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.smartscreen-toggle-btn:hover {
+  background: var(--accent-soft-bg);
+  color: #ffffff;
+}
+
+.smartscreen-btn-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.smartscreen-icon {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.smartscreen-arrow {
+  color: var(--accent);
+  font-size: 0.75rem;
+  transition: transform 0.22s ease;
+}
+
+.smartscreen-toggle-btn.active .smartscreen-arrow {
+  transform: rotate(180deg);
+}
+
+.smartscreen-content {
+  display: none;
+  padding: 0 16px 16px;
+  border-top: 1px solid var(--divider);
+}
+
+.smartscreen-content.open {
+  display: block;
+}
+
+.smartscreen-inner {
+  padding-top: 14px;
+}
+
+.smartscreen-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.smartscreen-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+
+.smartscreen-steps-wrap {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--row-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.smartscreen-steps-title {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.smartscreen-steps-list {
+  padding-left: 20px;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.smartscreen-demo-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px dashed var(--divider);
+}
+
+.demo-link {
+  font-size: 0.84rem;
+  color: #56b4fc;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.demo-arrow {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.demo-btn {
+  background: #ffffff;
+  color: #0c182b;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
 /* Sections */
 h2 {
   font-size: 1.3rem;
