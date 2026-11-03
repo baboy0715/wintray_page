@@ -264,6 +264,25 @@ h2 {
   font-size: 0.94rem;
 }
 
+/* Feedback section */
+.feedback-intro {
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+  margin-bottom: 20px;
+}
+
+.feedback-frame-wrapper {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.feedback-frame-wrapper iframe {
+  width: 100%;
+  display: block;
+}
+
 /* Footer */
 .footer {
   text-align: center;
