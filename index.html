@@ -44,7 +44,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.2">
 </head>
 <body>
   <canvas id="snow-canvas" aria-hidden="true"></canvas>
@@ -61,11 +61,11 @@
     <!-- Évszak-választó navigációs fejléc (Season Switcher) -->
     <nav class="top-nav" aria-label="Évszak téma választó">
       <div class="season-switcher" role="group" aria-label="Évszak választó">
-        <button type="button" class="season-btn active" data-season-target="winter" aria-pressed="true">
+        <button type="button" class="season-btn active" data-season-target="winter" onclick="setSeason('winter')" aria-pressed="true">
           <span class="season-icon" aria-hidden="true">❄️</span>
           <span>Tél</span>
         </button>
-        <button type="button" class="season-btn" data-season-target="autumn" aria-pressed="false">
+        <button type="button" class="season-btn" data-season-target="autumn" onclick="setSeason('autumn')" aria-pressed="false">
           <span class="season-icon" aria-hidden="true">🍂</span>
           <span>Ősz</span>
           <span class="season-new-badge">ÚJ</span>
@@ -183,6 +183,6 @@
     </footer>
   </main>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2.2"></script>
 </body>
 </html>

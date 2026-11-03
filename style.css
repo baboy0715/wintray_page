@@ -1,5 +1,6 @@
 :root,
-html[data-season="winter"] {
+html[data-season="winter"],
+body[data-season="winter"] {
   --bg-top: #070d19;
   --bg-bottom: #0f1c33;
   --card-bg: rgba(16, 29, 52, 0.78);
@@ -24,29 +25,31 @@ html[data-season="winter"] {
   --divider: rgba(148, 197, 248, 0.12);
 }
 
-html[data-season="autumn"] {
-  --bg-top: #140c07;
-  --bg-bottom: #26150a;
-  --card-bg: rgba(38, 22, 12, 0.78);
-  --card-border: rgba(245, 166, 91, 0.2);
-  --text-primary: #fff8f0;
-  --text-secondary: #ebd2b7;
-  --text-muted: #ba936e;
-  --accent: #f59e0b;
-  --accent-hover: #fbbf24;
-  --accent-dark: #1f1004;
-  --accent-soft-bg: rgba(245, 158, 11, 0.14);
-  --accent-soft-border: rgba(245, 158, 11, 0.38);
-  --accent-glow: rgba(245, 158, 11, 0.16);
-  --row-bg: rgba(24, 13, 7, 0.72);
-  --row-border: rgba(245, 166, 91, 0.16);
-  --row-border-hover: rgba(245, 166, 91, 0.35);
-  --drawer-bg: rgba(16, 9, 4, 0.68);
-  --btn-optifine-bg: #b45309;
-  --btn-optifine-hover: #d97706;
-  --pill-bg: rgba(42, 23, 11, 0.92);
-  --pill-bg-hover: rgba(58, 32, 15, 0.96);
-  --divider: rgba(245, 166, 91, 0.14);
+html[data-season="autumn"],
+body[data-season="autumn"],
+.autumn-theme {
+  --bg-top: #140c07 !important;
+  --bg-bottom: #26150a !important;
+  --card-bg: rgba(38, 22, 12, 0.82) !important;
+  --card-border: rgba(245, 166, 91, 0.28) !important;
+  --text-primary: #fff8f0 !important;
+  --text-secondary: #ebd2b7 !important;
+  --text-muted: #ba936e !important;
+  --accent: #f59e0b !important;
+  --accent-hover: #fbbf24 !important;
+  --accent-dark: #1f1004 !important;
+  --accent-soft-bg: rgba(245, 158, 11, 0.18) !important;
+  --accent-soft-border: rgba(245, 158, 11, 0.45) !important;
+  --accent-glow: rgba(245, 158, 11, 0.24) !important;
+  --row-bg: rgba(26, 14, 8, 0.75) !important;
+  --row-border: rgba(245, 166, 91, 0.22) !important;
+  --row-border-hover: rgba(245, 166, 91, 0.45) !important;
+  --drawer-bg: rgba(18, 10, 5, 0.75) !important;
+  --btn-optifine-bg: #b45309 !important;
+  --btn-optifine-hover: #d97706 !important;
+  --pill-bg: rgba(42, 23, 11, 0.95) !important;
+  --pill-bg-hover: rgba(58, 32, 15, 0.98) !important;
+  --divider: rgba(245, 166, 91, 0.18) !important;
 }
 
 * {
@@ -68,7 +71,19 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.45s ease, color 0.3s ease;
+  transition: background-color 0.4s ease, color 0.3s ease;
+}
+
+html[data-season="autumn"],
+body[data-season="autumn"] {
+  background-color: #140c07 !important;
+  background-image: linear-gradient(180deg, #140c07 0%, #26150a 100%) !important;
+}
+
+html[data-season="winter"],
+body[data-season="winter"] {
+  background-color: #070d19 !important;
+  background-image: linear-gradient(180deg, #070d19 0%, #0f1c33 100%) !important;
 }
 
 #snow-canvas {
@@ -88,6 +103,8 @@ html, body {
   display: flex;
   justify-content: center;
   margin-bottom: -4px;
+  position: relative;
+  z-index: 10;
 }
 
 .season-switcher {
@@ -102,6 +119,8 @@ html, body {
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 18px var(--accent-glow);
   transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  position: relative;
+  z-index: 10;
 }
 
 .season-btn {
@@ -117,23 +136,26 @@ html, body {
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
   transition: all 0.22s ease;
 }
 
 .season-btn:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .season-btn.active {
-  background: var(--accent);
-  color: var(--accent-dark);
+  background: var(--accent) !important;
+  color: var(--accent-dark) !important;
   box-shadow: 0 4px 14px var(--accent-glow);
 }
 
 .season-icon {
   font-size: 1.05rem;
   line-height: 1;
+  pointer-events: none;
 }
 
 .season-new-badge {
@@ -145,6 +167,7 @@ html, body {
   background: rgba(245, 158, 11, 0.22);
   color: #fbbf24;
   border: 1px solid rgba(245, 158, 11, 0.45);
+  pointer-events: none;
   transition: all 0.22s ease;
 }
 
@@ -238,6 +261,7 @@ h1 {
   color: var(--text-secondary);
   max-width: 650px;
   margin: 0 auto 26px;
+  transition: color 0.3s ease;
 }
 
 .hero-actions-container {
@@ -268,7 +292,7 @@ h1 {
   padding: 13px 26px;
   border-radius: 10px;
   box-shadow: 0 4px 18px var(--accent-glow);
-  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
 
 .btn-download:hover {
@@ -458,7 +482,7 @@ h2 {
   gap: 6px;
 }
 
-/* Korábbi verziók kinyitó gombja (OptiFine + More / Show all versions stílus) */
+/* Korábbi verziók kinyitó gombja */
 .toggle-older-container {
   text-align: center;
   padding-top: 8px;

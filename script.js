@@ -1,21 +1,83 @@
-// 1. Évszak-választó (Season Switcher) és Háttér Canvas (Téli hóesés / Őszi falevelek + eső)
-(function initSeasonAndCanvas() {
+// ========================================================
+// 1. Évszak-kezelés és Háttér Canvas (Téli hóesés / Őszi levelek és eső)
+// ========================================================
+
+function getStoredSeason() {
+  try {
+    return localStorage.getItem('wintertray_season') || 'winter';
+  } catch (e) {
+    return 'winter';
+  }
+}
+
+function setStoredSeason(val) {
+  try {
+    localStorage.setItem('wintertray_season', val);
+  } catch (e) {}
+}
+
+let currentSeason = getStoredSeason();
+
+// Globálisan elérhető évszakváltó függvény
+window.setSeason = function(season) {
+  currentSeason = season === 'autumn' ? 'autumn' : 'winter';
+  setStoredSeason(currentSeason);
+
   const htmlEl = document.documentElement;
+  const bodyEl = document.body;
   const metaTheme = document.getElementById('meta-theme-color');
-  const seasonBtns = document.querySelectorAll('[data-season-target]');
+  const heroBadge = document.getElementById('hero-badge');
+
+  htmlEl.setAttribute('data-season', currentSeason);
+  if (bodyEl) {
+    bodyEl.setAttribute('data-season', currentSeason);
+    if (currentSeason === 'autumn') {
+      bodyEl.classList.add('autumn-theme');
+    } else {
+      bodyEl.classList.remove('autumn-theme');
+    }
+  }
+
+  if (metaTheme) {
+    metaTheme.setAttribute('content', currentSeason === 'autumn' ? '#140c07' : '#070d19');
+  }
+
+  if (heroBadge) {
+    heroBadge.textContent = currentSeason === 'autumn'
+      ? 'Windows 10 / 11 (64-bit) • Őszi és Téli kiadás 🍂'
+      : 'Windows 10 / 11 (64-bit) • Téli és Őszi kiadás ❄️';
+  }
+
+  // Gombok aktív állapotának frissítése
+  const seasonBtns = document.querySelectorAll('.season-btn');
+  seasonBtns.forEach(btn => {
+    const target = btn.getAttribute('data-season-target');
+    const isMatch = target === currentSeason;
+    btn.classList.toggle('active', isMatch);
+    btn.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
+  });
+
+  // Felsorolás ikonok frissítése
   const bullets = document.querySelectorAll('.feature-list .bullet');
+  bullets.forEach(b => {
+    b.textContent = currentSeason === 'autumn' ? '🍂' : '❄';
+  });
+
+  // Részecskék frissítése a vásznon
+  if (window.onSeasonChange) {
+    window.onSeasonChange(currentSeason);
+  }
+};
+
+(function initCanvasEngine() {
   const canvas = document.getElementById('snow-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  let currentSeason = localStorage.getItem('wintertray_season') || 'winter';
   let width = 0;
   let height = 0;
 
-  // Téli részecskék (hópelyhek)
   let snowflakes = [];
-
-  // Őszi részecskék (falevelek, esőcseppek, mikrocsobbanások)
   let leaves = [];
   let raindrops = [];
   let ripples = [];
@@ -52,33 +114,16 @@
     }
   }
 
-  function createAutumnParticles() {
-    const leafCount = Math.min(42, Math.max(18, Math.floor((width * height) / 42000)));
-    const rainCount = Math.min(65, Math.max(28, Math.floor((width * height) / 26000)));
-
-    leaves = [];
-    for (let i = 0; i < leafCount; i++) {
-      leaves.push(makeLeaf(Math.random() * height));
-    }
-
-    raindrops = [];
-    for (let i = 0; i < rainCount; i++) {
-      raindrops.push(makeRaindrop(Math.random() * height));
-    }
-
-    ripples = [];
-  }
-
   function makeLeaf(initialY) {
     const color = autumnPalette[Math.floor(Math.random() * autumnPalette.length)];
     return {
       x: Math.random() * width,
-      y: initialY !== undefined ? initialY : -20,
+      y: initialY !== undefined ? initialY : -25,
       size: Math.random() * 6 + 7.5,
       type: Math.floor(Math.random() * 3), // 0: nyír, 1: tölgy, 2: juhar
       color: color,
-      speedY: Math.random() * 0.75 + 0.45,
-      speedX: Math.random() * 0.45 + 0.1,
+      speedY: Math.random() * 0.8 + 0.5,
+      speedX: Math.random() * 0.5 + 0.15,
       swayAmp: Math.random() * 0.9 + 0.35,
       swaySpeed: Math.random() * 0.018 + 0.008,
       swayAngle: Math.random() * Math.PI * 2,
@@ -101,43 +146,60 @@
     };
   }
 
-  function drawLeafShape(ctx, type, s) {
-    ctx.beginPath();
-    if (type === 0) {
-      // Nyírlevél (csepp/ovális forma)
-      ctx.moveTo(0, -s);
-      ctx.quadraticCurveTo(s * 0.85, -s * 0.2, 0, s);
-      ctx.quadraticCurveTo(-s * 0.85, -s * 0.2, 0, -s);
-    } else if (type === 1) {
-      // Tölgyfalevél (hullámos/karéjos)
-      ctx.moveTo(0, -s);
-      ctx.bezierCurveTo(s * 0.6, -s * 0.8, s * 0.9, -s * 0.2, s * 0.45, s * 0.15);
-      ctx.bezierCurveTo(s * 0.8, s * 0.45, s * 0.4, s * 0.85, 0, s);
-      ctx.bezierCurveTo(-s * 0.4, s * 0.85, -s * 0.8, s * 0.45, -s * 0.45, s * 0.15);
-      ctx.bezierCurveTo(-s * 0.9, -s * 0.2, -s * 0.6, -s * 0.8, 0, -s);
-    } else {
-      // Juharlevél (csúcsos csillagszerű)
-      ctx.moveTo(0, -s * 1.05);
-      ctx.lineTo(s * 0.32, -s * 0.35);
-      ctx.lineTo(s * 0.95, -s * 0.45);
-      ctx.lineTo(s * 0.5, s * 0.1);
-      ctx.lineTo(s * 0.72, s * 0.65);
-      ctx.lineTo(0, s * 0.45);
-      ctx.lineTo(-s * 0.72, s * 0.65);
-      ctx.lineTo(-s * 0.5, s * 0.1);
-      ctx.lineTo(-s * 0.95, -s * 0.45);
-      ctx.lineTo(-s * 0.32, -s * 0.35);
-      ctx.closePath();
-    }
-    ctx.fill();
-    ctx.lineWidth = 0.7;
-    ctx.stroke();
+  function createAutumnParticles() {
+    const leafCount = Math.min(42, Math.max(18, Math.floor((width * height) / 42000)));
+    const rainCount = Math.min(65, Math.max(28, Math.floor((width * height) / 26000)));
 
-    // Levélnyél és főér
-    ctx.beginPath();
-    ctx.moveTo(0, -s * 0.6);
-    ctx.lineTo(0, s * 1.25);
-    ctx.stroke();
+    leaves = [];
+    for (let i = 0; i < leafCount; i++) {
+      leaves.push(makeLeaf(Math.random() * height));
+    }
+
+    raindrops = [];
+    for (let i = 0; i < rainCount; i++) {
+      raindrops.push(makeRaindrop(Math.random() * height));
+    }
+
+    ripples = [];
+  }
+
+  function drawLeafShape(c, type, s) {
+    c.beginPath();
+    if (type === 0) {
+      // Nyírlevél
+      c.moveTo(0, -s);
+      c.quadraticCurveTo(s * 0.85, -s * 0.2, 0, s);
+      c.quadraticCurveTo(-s * 0.85, -s * 0.2, 0, -s);
+    } else if (type === 1) {
+      // Tölgyfalevél
+      c.moveTo(0, -s);
+      c.bezierCurveTo(s * 0.6, -s * 0.8, s * 0.9, -s * 0.2, s * 0.45, s * 0.15);
+      c.bezierCurveTo(s * 0.8, s * 0.45, s * 0.4, s * 0.85, 0, s);
+      c.bezierCurveTo(-s * 0.4, s * 0.85, -s * 0.8, s * 0.45, -s * 0.45, s * 0.15);
+      c.bezierCurveTo(-s * 0.9, -s * 0.2, -s * 0.6, -s * 0.8, 0, -s);
+    } else {
+      // Juharlevél
+      c.moveTo(0, -s * 1.05);
+      c.lineTo(s * 0.32, -s * 0.35);
+      c.lineTo(s * 0.95, -s * 0.45);
+      c.lineTo(s * 0.5, s * 0.1);
+      c.lineTo(s * 0.72, s * 0.65);
+      c.lineTo(0, s * 0.45);
+      c.lineTo(-s * 0.72, s * 0.65);
+      c.lineTo(-s * 0.5, s * 0.1);
+      c.lineTo(-s * 0.95, -s * 0.45);
+      c.lineTo(-s * 0.32, -s * 0.35);
+      c.closePath();
+    }
+    c.fill();
+    c.lineWidth = 0.7;
+    c.stroke();
+
+    // Levél szára
+    c.beginPath();
+    c.moveTo(0, -s * 0.5);
+    c.lineTo(0, s * 1.25);
+    c.stroke();
   }
 
   function updateAndDrawWinter() {
@@ -202,11 +264,17 @@
         ripples.splice(i, 1);
         continue;
       }
-      ctx.beginPath();
-      ctx.ellipse(rp.x, rp.y, rp.rx, rp.rx * 0.32, 0, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(245, 185, 120, ${rp.alpha})`;
-      ctx.lineWidth = 0.9;
-      ctx.stroke();
+      if (rp.rx > 0) {
+        ctx.beginPath();
+        if (ctx.ellipse) {
+          ctx.ellipse(rp.x, rp.y, rp.rx, rp.rx * 0.32, 0, 0, Math.PI * 2);
+        } else {
+          ctx.arc(rp.x, rp.y, rp.rx, 0, Math.PI * 2);
+        }
+        ctx.strokeStyle = `rgba(245, 185, 120, ${rp.alpha})`;
+        ctx.lineWidth = 0.9;
+        ctx.stroke();
+      }
     }
 
     // 3. Hulló őszi falevelek
@@ -248,38 +316,17 @@
     requestAnimationFrame(animate);
   }
 
-  function applySeason(season) {
-    currentSeason = season === 'autumn' ? 'autumn' : 'winter';
-    htmlEl.setAttribute('data-season', currentSeason);
-    localStorage.setItem('wintertray_season', currentSeason);
-
-    if (metaTheme) {
-      metaTheme.setAttribute('content', currentSeason === 'autumn' ? '#140c07' : '#070d19');
+  window.onSeasonChange = function(newSeason) {
+    if (newSeason === 'autumn') {
+      if (leaves.length === 0) createAutumnParticles();
+    } else {
+      if (snowflakes.length === 0) createWinterParticles();
     }
-
-    seasonBtns.forEach(btn => {
-      const isMatch = btn.getAttribute('data-season-target') === currentSeason;
-      btn.classList.toggle('active', isMatch);
-      btn.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
-    });
-
-    bullets.forEach(b => {
-      b.textContent = currentSeason === 'autumn'
-        ? (b.getAttribute('data-autumn-bullet') || '🍂')
-        : (b.getAttribute('data-winter-bullet') || '❄');
-    });
-  }
-
-  seasonBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      applySeason(btn.getAttribute('data-season-target'));
-    });
-  });
+  };
 
   resize();
   createWinterParticles();
   createAutumnParticles();
-  applySeason(currentSeason);
 
   window.addEventListener('resize', () => {
     resize();
@@ -290,7 +337,18 @@
   requestAnimationFrame(animate);
 })();
 
+// Kezdeti állapot alkalmazása DOM betöltésekor
+document.addEventListener('DOMContentLoaded', () => {
+  window.setSeason(currentSeason);
+});
+// Ha már betöltődött volna:
+if (document.readyState === 'interactive' || document.readyState === 'complete') {
+  window.setSeason(currentSeason);
+}
+
+// ========================================================
 // 2. OptiFine-stílusú kompakt verziólista és leugró változásjegyzék
+// ========================================================
 (async function loadReleases() {
   const mainBtn = document.getElementById('main-download-btn');
   const versionInfo = document.getElementById('current-version-info');
@@ -300,7 +358,6 @@
     const card = document.createElement('div');
     card.className = 'release-card-row';
 
-    // Fő vízszintes sáv (OptiFine stílus)
     const mainBar = document.createElement('div');
     mainBar.className = 'release-main-bar';
 
@@ -336,7 +393,7 @@
     dlBtn.setAttribute('download', rel.file);
     dlBtn.innerHTML = `<span>Letöltés (.exe)</span>`;
 
-    // Változások lenyitása gomb (leugró ablak/fiók)
+    // Változások lenyitása gomb
     const toggleBtn = document.createElement('button');
     toggleBtn.className = 'btn-toggle-changelog';
     toggleBtn.type = 'button';
@@ -349,7 +406,7 @@
     mainBar.appendChild(rightActions);
     card.appendChild(mainBar);
 
-    // Lenyíló változáslista rész
+    // Lenyíló változáslista
     const drawer = document.createElement('div');
     drawer.className = 'release-changelog-drawer';
 
@@ -380,7 +437,7 @@
   }
 
   try {
-    const response = await fetch('releases/releases.json', { cache: 'no-cache' });
+    const response = await fetch('releases/releases.json?v=' + Date.now(), { cache: 'no-cache' });
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }
@@ -390,23 +447,28 @@
     const latest = data.latest || releases[0] || null;
 
     if (!latest) {
-      versionInfo.textContent = 'Jelenleg nincs elérhető telepítő.';
-      wrapper.innerHTML = '<p class="loading-text">Még nincs feltöltött kiadás.</p>';
+      if (versionInfo) versionInfo.textContent = 'Jelenleg nincs elérhető telepítő.';
+      if (wrapper) wrapper.innerHTML = '<p class="loading-text">Még nincs feltöltött kiadás.</p>';
       return;
     }
 
-    // Fő Hero gomb beállítása
-    mainBtn.href = latest.url;
-    mainBtn.setAttribute('download', latest.file);
-    versionInfo.textContent = `Legújabb: ${latest.version} (${latest.file}) • Windows telepítő (.exe)`;
+    // Fő letöltés gomb beállítása
+    if (mainBtn) {
+      mainBtn.href = latest.url;
+      mainBtn.setAttribute('download', latest.file);
+    }
+    if (versionInfo) {
+      versionInfo.textContent = `Legújabb: ${latest.version} (${latest.file}) • Windows telepítő (.exe)`;
+    }
 
+    if (!wrapper) return;
     wrapper.innerHTML = '';
 
     // 1. Csak a legújabb verzió jelenik meg kiemelve
     const latestCard = renderReleaseRow(latest, true);
     wrapper.appendChild(latestCard);
 
-    // 2. Ha vannak régebbi verziók, "+ Korábbi verziók megjelenítése" leugró alá kerülnek
+    // 2. Régebbi verziók lenyitható listában
     const olderReleases = releases.slice(1);
     if (olderReleases.length > 0) {
       const toggleContainer = document.createElement('div');
@@ -437,7 +499,7 @@
     }
 
   } catch (err) {
-    versionInfo.textContent = 'Nem sikerült betölteni a verziókat.';
-    wrapper.innerHTML = '<p class="loading-text">A kiadások listája jelenleg nem érhető el.</p>';
+    if (versionInfo) versionInfo.textContent = 'Nem sikerült betölteni a verziókat.';
+    if (wrapper) wrapper.innerHTML = '<p class="loading-text">A kiadások listája jelenleg nem érhető el.</p>';
   }
 })();
