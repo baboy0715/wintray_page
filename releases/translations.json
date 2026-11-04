@@ -19,5 +19,6 @@
   "Egérkurzorral lesöpörhető hóréteg": "Mouse cursor sweepable snow layer",
   "Növekvő, kattintással széttörhető jégcsapok és olvadási/csepegési effekt": "Increasing click-break icicles and melt/drip effect",
   "Magyar nyelvű tálcamenü (system tray)": "Hungarian tray menu (system tray)",
-  "Automatikus szüneteltetés teljes képernyős alkalmazásoknál és játékoknál (0% terhelés)": "Auto pause for full screen apps and games (0% load)"
+  "Automatikus szüneteltetés teljes képernyős alkalmazásoknál és játékoknál (0% terhelés)": "Auto pause for full screen apps and games (0% load)",
+  "Beépített .NET 8 futtatókörnyezet (Self-Contained): Mostantól nem szükséges letölteni a Windows Desktop Runtime-ot, a program azonnal, külső függőségek nélkül elindul.": "Built-in .NET 8 runtime (Self-Contained): You no longer need to download Windows Desktop Runtime, the program starts immediately, without external dependencies."
 }

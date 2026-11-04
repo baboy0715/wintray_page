@@ -66,7 +66,7 @@ const i18n = {
     specOsLabel: 'Operating System',
     specOsValue: 'Windows 10 or Windows 11 (64-bit)',
     specRuntimeLabel: 'Framework',
-    specRuntimeValue: '.NET 8.0 Desktop Runtime',
+    specRuntimeValue: '.NET 8.0 (Built-in Self-Contained, no extra install needed)',
     specResourceLabel: 'Resource Usage',
     specResourceValue: 'Minimal CPU/GPU usage (Hardware accelerated)',
     feedbackBadge: 'Your Feedback Matters!',
@@ -122,7 +122,7 @@ const i18n = {
     specOsLabel: 'Operációs rendszer',
     specOsValue: 'Windows 10 vagy Windows 11 (64-bit)',
     specRuntimeLabel: 'Keretrendszer',
-    specRuntimeValue: '.NET 8.0 Desktop Runtime',
+    specRuntimeValue: '.NET 8.0 (Beépítve a telepítőbe, nem igényel külön telepítést)',
     specResourceLabel: 'Erőforrásigény',
     specResourceValue: 'Minimális CPU/GPU használat (hardveresen gyorsított megjelenítés)',
     feedbackBadge: 'Fontos a véleményed!',
@@ -859,29 +859,13 @@ window.renderReleasesList = async function() {
   }
 })();
 
-function bootstrapVideoAutoplay() {
-  const video = document.getElementById('intro-video');
-  if (video) {
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Böngésző blokkolhatja a hangos lejátszást, próbáljuk némítva (muted)
-        video.muted = true;
-        video.play().catch(() => {});
-      });
-    }
-  }
-}
-
 // Kezdeti állapot aktiválása: ALAPÉRTELMEZETTEN ANGOL (vagy tárolt nyelv)
 document.addEventListener('DOMContentLoaded', () => {
   window.setLanguage(currentLang);
   window.setSeason(currentSeason);
-  bootstrapVideoAutoplay();
 });
 
 if (document.readyState === 'interactive' || document.readyState === 'complete') {
   window.setLanguage(currentLang);
   window.setSeason(currentSeason);
-  bootstrapVideoAutoplay();
 }

@@ -1,0 +1,1 @@
+Beépített .NET 8 futtatókörnyezet (Self-Contained): Mostantól nem szükséges letölteni a Windows Desktop Runtime-ot, a program azonnal, külső függőségek nélkül elindul.

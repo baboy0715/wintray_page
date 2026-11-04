@@ -1,18 +1,31 @@
 {
   "latest": {
-    "version": "v2.1",
-    "rawVersion": "2.1",
-    "file": "WinterTray-Setup-v2.1.exe",
-    "url": "releases/WinterTray-Setup-v2.1.exe",
+    "version": "v2.2",
+    "rawVersion": "2.2",
+    "file": "WinterTray-Setup-v2.2.exe",
+    "url": "releases/WinterTray-Setup-v2.2.exe",
     "date": "2026-11-04",
     "changes": [
-      "Angol nyelvű felhasználói felület"
+      "Beépített .NET 8 futtatókörnyezet (Self-Contained): Mostantól nem szükséges letölteni a Windows Desktop Runtime-ot, a program azonnal, külső függőségek nélkül elindul."
     ],
     "changes_en": [
-      "English user interface"
+      "Built-in .NET 8 runtime (Self-Contained): You no longer need to download Windows Desktop Runtime, the program starts immediately, without external dependencies."
     ]
   },
   "releases": [
+    {
+      "version": "v2.2",
+      "rawVersion": "2.2",
+      "file": "WinterTray-Setup-v2.2.exe",
+      "url": "releases/WinterTray-Setup-v2.2.exe",
+      "date": "2026-11-04",
+      "changes": [
+        "Beépített .NET 8 futtatókörnyezet (Self-Contained): Mostantól nem szükséges letölteni a Windows Desktop Runtime-ot, a program azonnal, külső függőségek nélkül elindul."
+      ],
+      "changes_en": [
+        "Built-in .NET 8 runtime (Self-Contained): You no longer need to download Windows Desktop Runtime, the program starts immediately, without external dependencies."
+      ]
+    },
     {
       "version": "v2.1",
       "rawVersion": "2.1",
