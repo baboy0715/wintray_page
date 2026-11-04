@@ -74,7 +74,12 @@ const i18n = {
     feedbackOpenNewTab: 'Open in new tab ↗',
     feedbackIntro: 'Please share your impressions, suggest new features, or report any bugs to help us make WinterTray even better!',
     floatingFeedbackText: 'Feedback / Bug Report',
-    footerText: 'WinterTray · Winter & Autumn Windows Desktop Atmosphere Application'
+    footerText: 'WinterTray · Winter & Autumn Windows Desktop Atmosphere Application',
+    videoTitle: 'WinterTray – Showcase & Installation Guide',
+    videoHeroBtn: 'Video Demo',
+    videoMinimizeTitle: 'Minimize to corner',
+    videoExpandTitle: 'Expand to fullscreen',
+    videoCloseTitle: 'Close video'
   },
   hu: {
     pageTitle: 'WinterTray – Téli hóesés és Őszi falevélhullás Windows 10 és 11 rendszerekre',
@@ -125,7 +130,12 @@ const i18n = {
     feedbackOpenNewTab: 'Megnyitás külön lapon ↗',
     feedbackIntro: 'Kérlek, oszd meg a tapasztalataidat, ötleteidet vagy jelentsd be a hibákat, hogy még jobbá tehessük a WinterTray-t!',
     floatingFeedbackText: 'Vélemény / Hibabejelentés',
-    footerText: 'WinterTray · Téli és őszi Windows asztali hangulat-alkalmazás'
+    footerText: 'WinterTray · Téli és őszi Windows asztali hangulat-alkalmazás',
+    videoTitle: 'WinterTray – Bemutató és Letöltési Útmutató',
+    videoHeroBtn: 'Videó bemutató',
+    videoMinimizeTitle: 'Kicsinyítés a sarokba',
+    videoExpandTitle: 'Kinyitás teljes méretre',
+    videoCloseTitle: 'Bezárás'
   }
 };
 
@@ -242,6 +252,18 @@ window.setLanguage = function(lang) {
   const footer = document.getElementById('footer-text');
   if (footer) footer.innerHTML = t.footerText;
 
+  // Videó szövegek és gombok
+  const vTitle = document.getElementById('video-title-text');
+  if (vTitle) vTitle.textContent = t.videoTitle;
+  const vHeroBtn = document.getElementById('hero-video-text');
+  if (vHeroBtn) vHeroBtn.textContent = t.videoHeroBtn;
+  const vMinBtn = document.getElementById('video-minimize-btn');
+  if (vMinBtn) vMinBtn.setAttribute('title', t.videoMinimizeTitle);
+  const vExpBtn = document.getElementById('video-expand-btn');
+  if (vExpBtn) vExpBtn.setAttribute('title', t.videoExpandTitle);
+  const vClsBtn = document.getElementById('video-close-btn');
+  if (vClsBtn) vClsBtn.setAttribute('title', t.videoCloseTitle);
+
   // Verziósorok és lefordított changelogok azonnali újrarajzolása
   if (window.renderReleasesList) {
     window.renderReleasesList();
@@ -304,6 +326,50 @@ window.toggleSmartScreenHelp = function() {
   const isOpen = content.classList.toggle('open');
   btn.classList.toggle('active', isOpen);
   btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+};
+
+// ========================================================
+// Videó Felugró Modal & Lebegő Mini-lejátszó funkciók
+// ========================================================
+
+window.minimizeVideo = function() {
+  const overlay = document.getElementById('video-overlay');
+  const container = document.getElementById('video-container');
+  if (!overlay || !container) return;
+
+  overlay.classList.remove('active');
+  container.classList.remove('modal-mode');
+  container.classList.add('mini-mode');
+};
+
+window.maximizeVideo = function() {
+  const overlay = document.getElementById('video-overlay');
+  const container = document.getElementById('video-container');
+  const video = document.getElementById('intro-video');
+  if (!overlay || !container) return;
+
+  container.classList.remove('closed');
+  container.classList.remove('mini-mode');
+  container.classList.add('modal-mode');
+  overlay.classList.add('active');
+
+  if (video && video.paused) {
+    video.play().catch(() => {});
+  }
+};
+
+window.closeVideoCompletely = function(e) {
+  if (e) e.stopPropagation();
+  const overlay = document.getElementById('video-overlay');
+  const container = document.getElementById('video-container');
+  const video = document.getElementById('intro-video');
+  if (video) video.pause();
+  if (overlay) overlay.classList.remove('active');
+  if (container) {
+    container.classList.remove('modal-mode');
+    container.classList.remove('mini-mode');
+    container.classList.add('closed');
+  }
 };
 
 // ========================================================
@@ -793,13 +859,29 @@ window.renderReleasesList = async function() {
   }
 })();
 
+function bootstrapVideoAutoplay() {
+  const video = document.getElementById('intro-video');
+  if (video) {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Böngésző blokkolhatja a hangos lejátszást, próbáljuk némítva (muted)
+        video.muted = true;
+        video.play().catch(() => {});
+      });
+    }
+  }
+}
+
 // Kezdeti állapot aktiválása: ALAPÉRTELMEZETTEN ANGOL (vagy tárolt nyelv)
 document.addEventListener('DOMContentLoaded', () => {
   window.setLanguage(currentLang);
   window.setSeason(currentSeason);
+  bootstrapVideoAutoplay();
 });
 
 if (document.readyState === 'interactive' || document.readyState === 'complete') {
   window.setLanguage(currentLang);
   window.setSeason(currentSeason);
+  bootstrapVideoAutoplay();
 }
