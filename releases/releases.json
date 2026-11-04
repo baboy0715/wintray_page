@@ -1,15 +1,31 @@
 {
   "latest": {
-    "version": "v2.0.1",
-    "rawVersion": "2.0.1",
-    "file": "WinterTray-Setup-v2.0.1.exe",
-    "url": "releases/WinterTray-Setup-v2.0.1.exe",
-    "date": "2026-11-03",
+    "version": "v2.1",
+    "rawVersion": "2.1",
+    "file": "WinterTray-Setup-v2.1.exe",
+    "url": "releases/WinterTray-Setup-v2.1.exe",
+    "date": "2026-11-04",
     "changes": [
-      "Visszajelzés és hibabejelentő űrlap link hozzáadása a tálcamenühöz és a Beállítások ablakhoz"
+      "Angol nyelvű felhasználói felület"
+    ],
+    "changes_en": [
+      "English user interface"
     ]
   },
   "releases": [
+    {
+      "version": "v2.1",
+      "rawVersion": "2.1",
+      "file": "WinterTray-Setup-v2.1.exe",
+      "url": "releases/WinterTray-Setup-v2.1.exe",
+      "date": "2026-11-04",
+      "changes": [
+        "Angol nyelvű felhasználói felület"
+      ],
+      "changes_en": [
+        "English user interface"
+      ]
+    },
     {
       "version": "v2.0.1",
       "rawVersion": "2.0.1",
@@ -18,6 +34,9 @@
       "date": "2026-11-03",
       "changes": [
         "Visszajelzés és hibabejelentő űrlap link hozzáadása a tálcamenühöz és a Beállítások ablakhoz"
+      ],
+      "changes_en": [
+        "Add a feedback and bug report form link to the tray menu and Settings window"
       ]
     },
     {
@@ -37,6 +56,18 @@
         "Hóvastagság korlát opció téli módban: tetszés szerint kikapcsolható a hó maximális vastagsági korlátja, így tetszőleges vastagságú hótakaró képződhet.",
         "Évszakhoz illeszkedő háttérkép támogatás: automatikus háttérkép-váltás a téli és az őszi hangulatú asztali háttér között.",
         "Memória- és teljesítmény-optimalizáció: zéró felesleges memóriaallokáció, zárt populációvezérlés, 120 FPS folyamatosság és 0% terhelés teljes képernyős játékok alatt."
+      ],
+      "changes_en": [
+        "New Autumn Mode: one-click toggle between winter snow and autumn mood from the tray menu and Settings window.",
+        "Sinusoidal autumn leaf fall: 3 unique leaf varieties (maple, oak, birch) and 4 autumn shades (orange, golden brown, red, twilight) with realistic floating and fine rotation.",
+        "Physical window adhesion: the leaves lie exactly on the top edge of the open windows in their angle of impact and shape, with a guaranteed seat.",
+        "Interactive mouse cursor sweep: the folded leaves fly off the window and continue to fall, receiving realistic momentum at the touch of the cursor.",
+        "Cozy autumn rain and splash: fine, sloping rain stripes and a micro-splash ripple effect on the top slats of the windows and the table (splashes layered under the leaves).",
+        "Ultra-smooth, analog fading: the folded leaves disappear with fade out animation at 120 fps, with adjustable lifespan (or infinite stay).",
+        "Customize tray settings: separately control whether leaves and rain sit on the Windows tray or elegantly fall off behind the tray.",
+        "Snow thickness limit option in winter mode: the maximum thickness limit of the snow can be switched off at any time, thus creating a snow cover of any thickness.",
+        "Seasonal wallpaper support: automatic wallpaper switching between winter and autumn mood desktop backgrounds.",
+        "Memory and performance optimization: zero redundant memory allocation, closed population control, 120 fps continuity, and 0% load during full-screen games."
       ]
     },
     {
@@ -55,6 +86,17 @@
         "Növekvő, kattintással széttörhető jégcsapok és olvadási/csepegési effekt",
         "Magyar nyelvű tálcamenü (system tray)",
         "Automatikus szüneteltetés teljes képernyős alkalmazásoknál és játékoknál (0% terhelés)"
+      ],
+      "changes_en": [
+        "First public release (Windows 10 and Windows 11 support)",
+        "Hardware-accelerated table snowfall at 120fps and adjustable wind physics",
+        "Dynamic snow accumulation on top of open windows and tray",
+        "Accurate tracking of Windows 11 rounded window frames",
+        "Physical inertia: snow that naturally pollinates when moving windows",
+        "Mouse cursor sweepable snow layer",
+        "Increasing click-break icicles and melt/drip effect",
+        "Hungarian tray menu (system tray)",
+        "Auto pause for full screen apps and games (0% load)"
       ]
     }
   ]

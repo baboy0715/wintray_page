@@ -97,7 +97,7 @@ body[data-season="winter"] {
 }
 
 /* =========================================
-   Évszak-választó kapcsoló (Season Switcher)
+   Évszak- és Nyelvválasztó kapcsolók (Nav Controls)
    ========================================= */
 .top-nav {
   display: flex;
@@ -107,7 +107,16 @@ body[data-season="winter"] {
   z-index: 10;
 }
 
-.season-switcher {
+.nav-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.season-switcher,
+.lang-switcher {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -123,16 +132,17 @@ body[data-season="winter"] {
   z-index: 10;
 }
 
-.season-btn {
+.season-btn,
+.lang-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   background: transparent;
   color: var(--text-secondary);
   border: 1px solid transparent;
-  padding: 8px 20px;
+  padding: 8px 18px;
   border-radius: 999px;
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
@@ -141,15 +151,23 @@ body[data-season="winter"] {
   transition: all 0.22s ease;
 }
 
-.season-btn:hover {
+.season-btn:hover,
+.lang-btn:hover {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.08);
 }
 
-.season-btn.active {
+.season-btn.active,
+.lang-btn.active {
   background: var(--accent) !important;
   color: var(--accent-dark) !important;
   box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+.lang-flag {
+  font-size: 1.05rem;
+  line-height: 1;
+  pointer-events: none;
 }
 
 .season-icon {

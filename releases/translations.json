@@ -1,0 +1,23 @@
+{
+  "Angol nyelvű felhasználói felület": "English user interface",
+  "Visszajelzés és hibabejelentő űrlap link hozzáadása a tálcamenühöz és a Beállítások ablakhoz": "Add a feedback and bug report form link to the tray menu and Settings window",
+  "Új őszi évszak mód (Autumn Mode): egyetlen kattintással váltható téli havazás és őszi hangulat a tálcamenüből és a Beállítások ablakból.": "New Autumn Mode: one-click toggle between winter snow and autumn mood from the tray menu and Settings window.",
+  "Szinuszos őszi falevél hullás: 3 egyedi levélfajta (juhar, tölgy, nyír) és 4 őszi színárnyalat (narancs, aranybarna, vörös, alkonyat) valósághű lebegéssel és finom forgással.": "Sinusoidal autumn leaf fall: 3 unique leaf varieties (maple, oak, birch) and 4 autumn shades (orange, golden brown, red, twilight) with realistic floating and fine rotation.",
+  "Fizikai ablakra tapadás: a levelek pontosan a becsapódási szögükben és formájukban fekszenek rá a nyitott ablakok felső szegélyére, garantált megüléssel.": "Physical window adhesion: the leaves lie exactly on the top edge of the open windows in their angle of impact and shape, with a guaranteed seat.",
+  "Interaktív egérkurzoros lesöprés: a megült levelek a kurzor érintésére valósághű lendületet kapva lerepülnek az ablakról és hullanak tovább.": "Interactive mouse cursor sweep: the folded leaves fly off the window and continue to fall, receiving realistic momentum at the touch of the cursor.",
+  "Hangulatos őszi esőzés és csobbanás: finom, dőlt esőcsíkok és mikrocsobbanó ripple-effektus az ablakok felső lécén és az asztalon (a csobbanások a falevelek alá rétegezve).": "Cozy autumn rain and splash: fine, sloping rain stripes and a micro-splash ripple effect on the top slats of the windows and the table (splashes layered under the leaves).",
+  "Ultra sima, analóg elhalványulás: a megült levelek 120 FPS-es, akadásmentes fade out animációval tűnnek el, állítható élettartammal (vagy végtelen tartózkodással).": "Ultra-smooth, analog fading: the folded leaves disappear with fade out animation at 120 fps, with adjustable lifespan (or infinite stay).",
+  "Tálca-beállítások testreszabása: külön szabályozható, hogy a levelek és az eső ráüljenek-e a Windows tálcára, vagy elegánsan a tálca mögé hullva tűnjenek el.": "Customize tray settings: separately control whether leaves and rain sit on the Windows tray or elegantly fall off behind the tray.",
+  "Hóvastagság korlát opció téli módban: tetszés szerint kikapcsolható a hó maximális vastagsági korlátja, így tetszőleges vastagságú hótakaró képződhet.": "Snow thickness limit option in winter mode: the maximum thickness limit of the snow can be switched off at any time, thus creating a snow cover of any thickness.",
+  "Évszakhoz illeszkedő háttérkép támogatás: automatikus háttérkép-váltás a téli és az őszi hangulatú asztali háttér között.": "Seasonal wallpaper support: automatic wallpaper switching between winter and autumn mood desktop backgrounds.",
+  "Memória- és teljesítmény-optimalizáció: zéró felesleges memóriaallokáció, zárt populációvezérlés, 120 FPS folyamatosság és 0% terhelés teljes képernyős játékok alatt.": "Memory and performance optimization: zero redundant memory allocation, closed population control, 120 fps continuity, and 0% load during full-screen games.",
+  "Első nyilvános kiadás (Windows 10 és Windows 11 támogatás)": "First public release (Windows 10 and Windows 11 support)",
+  "120 FPS-es, hardveresen gyorsított asztali hóesés és állítható szélfizika": "Hardware-accelerated table snowfall at 120fps and adjustable wind physics",
+  "Dinamikus hófelhalmozódás a nyitott ablakok tetején és a tálcán": "Dynamic snow accumulation on top of open windows and tray",
+  "Windows 11 lekerekített ablakkereteinek pontos lekövetése": "Accurate tracking of Windows 11 rounded window frames",
+  "Fizikai tehetetlenség: ablakmozgatáskor természetesen leporzó hó": "Physical inertia: snow that naturally pollinates when moving windows",
+  "Egérkurzorral lesöpörhető hóréteg": "Mouse cursor sweepable snow layer",
+  "Növekvő, kattintással széttörhető jégcsapok és olvadási/csepegési effekt": "Increasing click-break icicles and melt/drip effect",
+  "Magyar nyelvű tálcamenü (system tray)": "Hungarian tray menu (system tray)",
+  "Automatikus szüneteltetés teljes képernyős alkalmazásoknál és játékoknál (0% terhelés)": "Auto pause for full screen apps and games (0% load)"
+}

@@ -1,28 +1,27 @@
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 
 const releasesDir = path.join(__dirname, 'releases');
 const outputFile = path.join(releasesDir, 'releases.json');
+const translationsFile = path.join(releasesDir, 'translations.json');
 
 if (!fs.existsSync(releasesDir)) {
   fs.mkdirSync(releasesDir, { recursive: true });
 }
 
+let translationsCache = {};
+if (fs.existsSync(translationsFile)) {
+  try {
+    translationsCache = JSON.parse(fs.readFileSync(translationsFile, 'utf8'));
+  } catch (e) {
+    translationsCache = {};
+  }
+}
+
 function extractVersion(filename) {
   const match = filename.match(/v?(\d+(?:\.\d+)+)/i);
   return match ? match[1] : '0.0.0';
-}
-
-function compareVersionsDesc(a, b) {
-  const partsA = a.version.split('.').map(Number);
-  const partsB = b.version.split('.').map(Number);
-  const len = Math.max(partsA.length, partsB.length);
-  for (let i = 0; i < len; i++) {
-    const numA = partsA[i] || 0;
-    const numB = partsB[i] || 0;
-    if (numA !== numB) return numB - numA;
-  }
-  return b.file.localeCompare(a.file);
 }
 
 function parseTxtLines(content) {
@@ -53,7 +52,41 @@ function parseUnifiedChangelog(changelogPath) {
   return map;
 }
 
-function buildReleases() {
+function fetchTranslation(text) {
+  return new Promise(resolve => {
+    // If text already looks completely English or is cached
+    if (translationsCache[text]) {
+      return resolve(translationsCache[text]);
+    }
+
+    const url = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=hu|en';
+    const req = https.get(url, { timeout: 4000 }, res => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try {
+          const json = JSON.parse(data);
+          if (json && json.responseData && json.responseData.translatedText) {
+            let translated = json.responseData.translatedText.trim();
+            // Clean up possible HTML entities
+            translated = translated.replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&');
+            translationsCache[text] = translated;
+            return resolve(translated);
+          }
+        } catch (err) {}
+        resolve(text);
+      });
+    });
+
+    req.on('error', () => resolve(text));
+    req.on('timeout', () => {
+      req.destroy();
+      resolve(text);
+    });
+  });
+}
+
+async function buildReleases() {
   const files = fs.readdirSync(releasesDir);
   const exeFiles = files.filter(f => f.toLowerCase().endsWith('.exe'));
   const unifiedChangelog = parseUnifiedChangelog(path.join(releasesDir, 'changelog.txt'));
@@ -92,7 +125,6 @@ function buildReleases() {
       };
     });
   } else {
-    // Ha még nincs .exe feltöltve, a .txt fájlokból is felépítjük az előnézetet
     const txtFiles = files.filter(
       f => f.toLowerCase().endsWith('.txt') && f.toLowerCase() !== 'changelog.txt'
     );
@@ -115,6 +147,7 @@ function buildReleases() {
     });
   }
 
+  // Verziók rendezése csökkenő sorrendben (pl. v2.1 > v2.0.1 > v2.0 > v1.0)
   entries.sort((a, b) => {
     const partsA = a.rawVersion.split('.').map(Number);
     const partsB = b.rawVersion.split('.').map(Number);
@@ -127,13 +160,31 @@ function buildReleases() {
     return b.file.localeCompare(a.file);
   });
 
+  // Angol fordítások generálása/összegyűjtése minden változáshoz
+  console.log('Translating release changelogs to English...');
+  for (const entry of entries) {
+    entry.changes_en = [];
+    for (const change of entry.changes) {
+      const translated = await fetchTranslation(change);
+      entry.changes_en.push(translated);
+    }
+  }
+
+  // Mentjük a fordítási gyorsítótárat
+  try {
+    fs.writeFileSync(translationsFile, JSON.stringify(translationsCache, null, 2), 'utf8');
+  } catch (e) {}
+
   const output = {
     latest: entries.length > 0 ? entries[0] : null,
     releases: entries
   };
 
   fs.writeFileSync(outputFile, JSON.stringify(output, null, 2), 'utf8');
-  console.log(`Generated ${outputFile} with ${entries.length} release(s).`);
+  console.log(`Generated ${outputFile} with ${entries.length} release(s) (HU & EN changelogs included).`);
 }
 
-buildReleases();
+buildReleases().catch(err => {
+  console.error('Build error:', err);
+  process.exit(1);
+});

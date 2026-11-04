@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="hu" data-season="winter">
+<html lang="en" data-season="winter" data-lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WinterTray – Téli hóesés és Őszi falevélhullás Windows 10 és 11 rendszerekre</title>
-  <meta name="description" content="Könnyed, tálcáról futó téli és őszi asztali hangulat-alkalmazás Windows 10 és Windows 11 rendszerekre. Valós időben követi a nyitott ablakokat természetes hóréteggel, jégcsapokkal, hulló falevelekkel és esővel.">
-  <meta name="keywords" content="WinterTray, Windows hóesés, őszi falevél effekt, asztali hóesés, hóesés effekt Windows, Windows 11 hóesés, Windows 10 hóeffekt, asztali téli háttér, őszi háttér, desktop snow app, letöltés, ingyenes">
+  <title id="meta-title">WinterTray – Winter Desktop Snow & Autumn Leaves for Windows 10 & 11</title>
+  <meta name="description" id="meta-description" content="Lightweight system tray desktop snow and autumn atmosphere app for Windows 10 and Windows 11. Real-time window edge accumulation, icicles, falling leaves, and rain. Download free!">
+  <meta name="keywords" content="WinterTray, Windows snow, desktop snow app, desktop leaves, autumn effect, winter atmosphere, Windows 11 snow, Windows 10 snow, download, free">
   <meta name="author" content="WinterTray">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" id="meta-theme-color" content="#070d19">
@@ -15,17 +15,16 @@
 
   <!-- Open Graph / Facebook / Discord preview -->
   <meta property="og:type" content="website">
-  <meta property="og:locale" content="hu_HU">
-  <meta property="og:title" content="WinterTray – Téli hóesés és Őszi falevélhullás Windows 10 és 11 rendszerekre">
-  <meta property="og:description" content="Valósághű, 120 FPS-es asztali hóesés, jégcsapok, valamint őszi falevélhullás és esőzés Windows 10 és 11-re. Töltsd le a hivatalos telepítőt!">
+  <meta property="og:title" id="og-title" content="WinterTray – Winter Desktop Snow & Autumn Leaves for Windows 10 & 11">
+  <meta property="og:description" id="og-description" content="Realistic 120 FPS desktop snowfall, icicles, autumn leaf fall, and rain for Windows 10 & 11. Download the official installer!">
   <meta property="og:site_name" content="WinterTray">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="WinterTray – Téli hóesés és Őszi falevélhullás Windowsra">
-  <meta name="twitter:description" content="Valósághű, 120 FPS-es asztali hóesés, jégcsapok, valamint őszi falevélhullás és esőzés Windows 10 és 11-re.">
+  <meta name="twitter:title" id="twitter-title" content="WinterTray – Winter Desktop Snow & Autumn Leaves for Windows">
+  <meta name="twitter:description" id="twitter-description" content="Realistic 120 FPS desktop snowfall, icicles, autumn leaf fall, and rain for Windows 10 & 11.">
 
-  <!-- Strukturált adatok a Google kereső számára (Schema.org JSON-LD) -->
+  <!-- Structured data for Google Search (Schema.org JSON-LD) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -33,53 +32,68 @@
     "name": "WinterTray",
     "operatingSystem": "Windows 10, Windows 11 (64-bit)",
     "applicationCategory": "DesktopEnhancementApplication",
-    "softwareVersion": "2.0",
-    "description": "Könnyed, tálcáról futó téli és őszi asztali hangulat-alkalmazás Windows 10 és Windows 11 rendszerekre valós idejű ablakfelismeréssel, természetes hóréteggel, jégcsapokkal, őszi falevelekkel és esőzéssel.",
+    "softwareVersion": "2.1",
+    "description": "Lightweight system tray winter and autumn desktop atmosphere app for Windows 10 and Windows 11 with real-time window tracking, natural snow layers, icicles, autumn leaves, and rain.",
     "offers": {
       "@type": "Offer",
       "price": "0",
-      "priceCurrency": "HUF"
+      "priceCurrency": "USD"
     },
-    "downloadUrl": "https://wintray_page.pages.dev/releases/WinterTray-Setup-v2.0.exe"
+    "downloadUrl": "https://wintray_page.pages.dev/releases/WinterTray-Setup-v2.1.exe"
   }
   </script>
 
-  <link rel="stylesheet" href="style.css?v=2.3">
+  <link rel="stylesheet" href="style.css?v=2.4">
 </head>
 <body>
   <canvas id="snow-canvas" aria-hidden="true"></canvas>
 
-  <!-- Lebegő visszajelzés gomb a képernyő jobb alján -->
-  <a href="#feedback" class="floating-feedback-pill" title="Ugrás a visszajelzéshez">
+  <!-- Floating feedback pill (bottom right) -->
+  <a href="#feedback" class="floating-feedback-pill" id="floating-feedback-link" title="Jump to feedback">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
     </svg>
-    <span>Vélemény / Hibabejelentés</span>
+    <span id="floating-feedback-text">Feedback / Bug Report</span>
   </a>
 
   <main class="container">
-    <!-- Évszak-választó navigációs fejléc (Season Switcher) -->
-    <nav class="top-nav" aria-label="Évszak téma választó">
-      <div class="season-switcher" role="group" aria-label="Évszak választó">
-        <button type="button" class="season-btn active" data-season-target="winter" onclick="setSeason('winter')" aria-pressed="true">
-          <span class="season-icon" aria-hidden="true">❄️</span>
-          <span>Tél</span>
-        </button>
-        <button type="button" class="season-btn" data-season-target="autumn" onclick="setSeason('autumn')" aria-pressed="false">
-          <span class="season-icon" aria-hidden="true">🍂</span>
-          <span>Ősz</span>
-          <span class="season-new-badge">ÚJ</span>
-        </button>
+    <!-- Top Nav: Season Switcher & Language Switcher -->
+    <nav class="top-nav" aria-label="Theme and language navigation">
+      <div class="nav-controls">
+        <!-- Season Switcher -->
+        <div class="season-switcher" role="group" aria-label="Season Switcher">
+          <button type="button" class="season-btn active" data-season-target="winter" onclick="setSeason('winter')" aria-pressed="true">
+            <span class="season-icon" aria-hidden="true">❄️</span>
+            <span id="season-btn-winter-text">Winter</span>
+          </button>
+          <button type="button" class="season-btn" data-season-target="autumn" onclick="setSeason('autumn')" aria-pressed="false">
+            <span class="season-icon" aria-hidden="true">🍂</span>
+            <span id="season-btn-autumn-text">Autumn</span>
+            <span class="season-new-badge" id="season-btn-new-badge">NEW</span>
+          </button>
+        </div>
+
+        <!-- Language Switcher (Default: English) -->
+        <div class="lang-switcher" role="group" aria-label="Language Switcher">
+          <button type="button" class="lang-btn active" data-lang-target="en" onclick="setLanguage('en')" aria-pressed="true">
+            <span class="lang-flag" aria-hidden="true">🇺🇸</span>
+            <span>English</span>
+          </button>
+          <button type="button" class="lang-btn" data-lang-target="hu" onclick="setLanguage('hu')" aria-pressed="false">
+            <span class="lang-flag" aria-hidden="true">🇭🇺</span>
+            <span>Magyar</span>
+          </button>
+        </div>
       </div>
     </nav>
 
-    <!-- 1. Fejléc (Hero) és Letöltés -->
+    <!-- 1. Hero & Download -->
     <header class="hero card">
-      <div class="badge" id="hero-badge">Windows 10 / 11 (64-bit) • Téli és Őszi mód</div>
+      <div class="badge" id="hero-badge">Windows 10 / 11 (64-bit) • Winter & Autumn Edition ❄️</div>
       <h1>WinterTray</h1>
-      <p class="lead">
-        Könnyed, tálcáról (system tray) futó téli és őszi asztali hangulat-alkalmazás Windows 10 és Windows 11 rendszerekre.
-        Valós időben követi a nyitott ablakokat, amelyek tetején természetes hóréteg és jégcsapok, vagy őszi módban hulló falevelek és esőcseppek képződnek.
+      <p class="lead" id="hero-lead">
+        Lightweight system tray winter and autumn desktop atmosphere app for Windows 10 and Windows 11.
+        Tracks open windows in real-time, forming natural snow layers and icicles, or falling leaves and raindrops in autumn mode.
       </p>
 
       <div class="hero-actions-container">
@@ -90,44 +104,44 @@
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-            <span>Telepítő letöltése</span>
+            <span id="main-download-text">Download Installer</span>
           </a>
           <a href="#feedback" class="btn-feedback-hero">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
             </svg>
-            <span>Véleményt írok / Hibát jelentek</span>
+            <span id="hero-feedback-text">Leave Feedback / Report Bug</span>
           </a>
         </div>
         <div id="current-version-info" class="version-meta">
-          Verzió betöltése...
+          Loading version...
         </div>
 
-        <!-- SmartScreen segítség doboz -->
+        <!-- SmartScreen Help Box -->
         <div class="smartscreen-box">
           <button type="button" class="smartscreen-toggle-btn" id="smartscreen-btn" onclick="toggleSmartScreenHelp()" aria-expanded="false">
             <span class="smartscreen-btn-left">
               <span class="smartscreen-icon" aria-hidden="true">🛡️</span>
-              <span>„A Windows megvédte a számítógépét” ablak jelenik meg?</span>
+              <span id="smartscreen-toggle-text">Seeing "Windows protected your PC" blue popup?</span>
             </span>
             <span class="smartscreen-arrow">▼</span>
           </button>
           <div id="smartscreen-content" class="smartscreen-content">
             <div class="smartscreen-inner">
-              <div class="smartscreen-badge">100% Biztonságos &amp; Kártevőmentes</div>
-              <p class="smartscreen-desc">
-                A <strong>WinterTray</strong> egy független, nyílt forráskódú fejlesztés. A Windows Defender SmartScreen minden olyan frissen kiadott telepítőnél automatikusan megjeleníti ezt a kék védelmi ablakot, amely még nem rendelkezik évi többszázezer forintos nagyvállalati digitális tanúsítvánnyal.
+              <div class="smartscreen-badge" id="smartscreen-badge-text">100% Safe &amp; Clean</div>
+              <p class="smartscreen-desc" id="smartscreen-desc-text">
+                <strong>WinterTray</strong> is an independent, open-source project. Microsoft Defender SmartScreen automatically displays this blue protection warning for newly released software that does not yet possess an expensive annual corporate code-signing certificate.
               </p>
               <div class="smartscreen-steps-wrap">
-                <span class="smartscreen-steps-title">Megoldás 2 kattintással a telepítés elindításához:</span>
+                <span class="smartscreen-steps-title" id="smartscreen-steps-title-text">Quick 2-click solution to start the installation:</span>
                 <ol class="smartscreen-steps-list">
-                  <li>Kattints a kék ablakban az aláhúzott <strong>„További információ”</strong> linkre.</li>
-                  <li>Kattints a jobb alsó sarokban megjelenő <strong>„Futtatás mindenképpen”</strong> gombra.</li>
+                  <li id="smartscreen-step1-text">Click the underlined <strong>"More info"</strong> link in the blue window.</li>
+                  <li id="smartscreen-step2-text">Click the <strong>"Run anyway"</strong> button that appears in the bottom right corner.</li>
                 </ol>
                 <div class="smartscreen-demo-bar">
-                  <span class="demo-link">1. További információ</span>
+                  <span class="demo-link" id="smartscreen-demo1-text">1. More info</span>
                   <span class="demo-arrow">➔</span>
-                  <span class="demo-btn">2. Futtatás mindenképpen</span>
+                  <span class="demo-btn" id="smartscreen-demo2-text">2. Run anyway</span>
                 </div>
               </div>
             </div>
@@ -136,84 +150,84 @@
       </div>
     </header>
 
-    <!-- 2. Letöltések és Frissítési jegyzék (OptiFine stílusú leugró lista) -->
+    <!-- 2. Downloads & Changelog (OptiFine Style) -->
     <section class="section card">
-      <h2>Letöltések és Verziók</h2>
+      <h2 id="releases-heading">Downloads & Releases</h2>
       <div id="releases-wrapper" class="releases-wrapper">
-        <p class="loading-text">Kiadások betöltése...</p>
+        <p class="loading-text" id="releases-loading-text">Loading releases...</p>
       </div>
     </section>
 
-    <!-- 3. Főbb funkciók -->
+    <!-- 3. Key Features -->
     <section class="section card">
-      <h2>Főbb funkciók</h2>
+      <h2 id="features-heading">Key Features</h2>
       <ul class="feature-list">
         <li>
           <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
-          <span><strong>Téli és Őszi évszak mód:</strong> egyetlen kattintással váltható téli havazás és őszi hangulat a tálcamenüből, automatikus asztali háttérkép-váltással.</span>
+          <span id="feature-item-1"><strong>Winter &amp; Autumn Season Modes:</strong> Seamlessly switch between winter snowfall and cozy autumn atmosphere from the system tray menu, featuring automated desktop wallpaper switching.</span>
         </li>
         <li>
           <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
-          <span><strong>Szinuszos falevélhullás és őszi esőzés:</strong> 3 egyedi levélfajta (juhar, tölgy, nyír) 4 őszi színárnyalatban, finom dőlt esőcsíkokkal és mikrocsobbanó (ripple) effekttel.</span>
+          <span id="feature-item-2"><strong>Realistic Leaf Fall &amp; Autumn Rain:</strong> 3 distinct leaf types (birch, oak, maple) across 4 autumn color tones, accompanied by gentle slanted raindrops and ripple splash effects.</span>
         </li>
         <li>
           <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
-          <span><strong>Valósághű, 120 FPS-es asztali hóesés:</strong> több hópehely-stílus, szél-effekt, kikapcsolható hóvastagság-korlát, valamint növekvő, kattintással széttörhető jégcsapok.</span>
+          <span id="feature-item-3"><strong>Realistic 120 FPS Desktop Snow:</strong> Multiple snowflake styles, wind physics, optional snow thickness limit removal, and growing icicles that shatter on click.</span>
         </li>
         <li>
           <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
-          <span><strong>Fizikai ablakra tapadás és lesöprés:</strong> a hó és a falevelek a nyitott ablakok felső peremén és a tálcán ülnek meg, ablakmozgatáskor lehullanak, az egérkurzorral pedig lesöpörhetők.</span>
+          <span id="feature-item-4"><strong>Physical Window Accumulation &amp; Cursor Sweep:</strong> Snow and leaves settle realistically on top of open window frames and the taskbar, scattering when windows move or swept with your mouse cursor.</span>
         </li>
         <li>
           <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
-          <span><strong>Magyar nyelvű beállítások és 0% játékterhelés:</strong> testreszabható tálca-interakció, analóg 120 FPS-es elhalványulás és automatikus szüneteltetés teljes képernyős alkalmazásoknál.</span>
+          <span id="feature-item-5"><strong>Multi-language &amp; 0% Background Gaming Impact:</strong> English and Hungarian system tray settings, smooth 120 FPS fade-outs, and automatic suspension during full-screen apps and games.</span>
         </li>
       </ul>
     </section>
 
-    <!-- 4. Rendszerkövetelmények -->
+    <!-- 4. System Requirements -->
     <section class="section card">
-      <h2>Rendszerkövetelmények</h2>
+      <h2 id="specs-heading">System Requirements</h2>
       <div class="specs-grid">
         <div class="spec-item">
-          <span class="spec-label">Operációs rendszer</span>
-          <span class="spec-value">Windows 10 vagy Windows 11 (64-bit)</span>
+          <span class="spec-label" id="spec-os-label">Operating System</span>
+          <span class="spec-value" id="spec-os-value">Windows 10 or Windows 11 (64-bit)</span>
         </div>
         <div class="spec-item">
-          <span class="spec-label">Keretrendszer</span>
-          <span class="spec-value">.NET 8.0 Desktop Runtime</span>
+          <span class="spec-label" id="spec-runtime-label">Framework</span>
+          <span class="spec-value" id="spec-runtime-value">.NET 8.0 Desktop Runtime</span>
         </div>
         <div class="spec-item">
-          <span class="spec-label">Erőforrásigény</span>
-          <span class="spec-value">Minimális CPU/GPU használat (hardveresen gyorsított megjelenítés)</span>
+          <span class="spec-label" id="spec-resource-label">Resource Usage</span>
+          <span class="spec-value" id="spec-resource-value">Minimal CPU/GPU usage (Hardware accelerated)</span>
         </div>
       </div>
     </section>
 
-    <!-- 5. Kisebb, kiemelt visszajelzés és hibabejelentés szekció -->
+    <!-- 5. Feedback & Bug Report -->
     <section id="feedback" class="section card feedback-card">
       <div class="feedback-header">
         <div>
-          <span class="badge feedback-badge">Fontos a véleményed!</span>
-          <h2>Visszajelzés és Hibabejelentés</h2>
+          <span class="badge feedback-badge" id="feedback-badge-text">Your Feedback Matters!</span>
+          <h2 id="feedback-heading">Feedback &amp; Bug Report</h2>
         </div>
-        <a href="https://qform.hu/form/wintertray-visszajelzes-funkcioertekeles-es-hibabejelentes-2" target="_blank" rel="noopener" class="feedback-external-link">
-          Megnyitás külön lapon ↗
+        <a href="https://qform.hu/form/wintertray-visszajelzes-funkcioertekeles-es-hibabejelentes-2" target="_blank" rel="noopener" class="feedback-external-link" id="feedback-external-link">
+          Open in new tab ↗
         </a>
       </div>
-      <p class="feedback-intro">
-        Kérlek, oszd meg a tapasztalataidat, ötleteidet vagy jelentsd be a hibákat, hogy még jobbá tehessük a WinterTray-t!
+      <p class="feedback-intro" id="feedback-intro-text">
+        Please share your impressions, suggest new features, or report any bugs to help us make WinterTray even better!
       </p>
       <div class="feedback-frame-wrapper">
-        <iframe src="https://qform.hu/form/wintertray-visszajelzes-funkcioertekeles-es-hibabejelentes-2" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0" title="WinterTray visszajelzés és hibabejelentés">Betöltés...</iframe>
+        <iframe src="https://qform.hu/form/wintertray-visszajelzes-funkcioertekeles-es-hibabejelentes-2" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0" title="WinterTray feedback and bug report">Loading...</iframe>
       </div>
     </section>
 
     <footer class="footer">
-      <p>WinterTray &middot; Téli és őszi Windows asztali hangulat-alkalmazás</p>
+      <p id="footer-text">WinterTray &middot; Winter &amp; Autumn Windows Desktop Atmosphere Application</p>
     </footer>
   </main>
 
-  <script src="script.js?v=2.3"></script>
+  <script src="script.js?v=2.4"></script>
 </body>
 </html>
