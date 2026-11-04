@@ -114,12 +114,16 @@ async function buildReleases() {
 
       const stat = fs.statSync(path.join(releasesDir, exeFile));
       const dateStr = stat.mtime.toISOString().split('T')[0];
+      const isOversized = stat.size > 24 * 1024 * 1024;
+      const downloadUrl = isOversized
+        ? `https://raw.githubusercontent.com/baboy0715/wintray_page/main/releases/${encodeURIComponent(exeFile)}`
+        : `releases/${encodeURIComponent(exeFile)}`;
 
       return {
         version: `v${version}`,
         rawVersion: version,
         file: exeFile,
-        url: `releases/${encodeURIComponent(exeFile)}`,
+        url: downloadUrl,
         date: dateStr,
         changes
       };
@@ -182,6 +186,23 @@ async function buildReleases() {
 
   fs.writeFileSync(outputFile, JSON.stringify(output, null, 2), 'utf8');
   console.log(`Generated ${outputFile} with ${entries.length} release(s) (HU & EN changelogs included).`);
+
+  // Ha Cloudflare Pages CI vagy npm run build fut, töröljük a 24 MB feletti fájlokat a deploy könyvtárból
+  const shouldCleanup = process.argv.includes('--cf-cleanup') || Boolean(process.env.CF_PAGES);
+  if (shouldCleanup) {
+    console.log('Cleaning up files exceeding 24MB for Cloudflare Pages deploy...');
+    const allFiles = fs.readdirSync(releasesDir);
+    for (const f of allFiles) {
+      const p = path.join(releasesDir, f);
+      try {
+        const s = fs.statSync(p);
+        if (s.isFile() && s.size > 24 * 1024 * 1024) {
+          console.log(`Removed ${f} (${(s.size / 1024 / 1024).toFixed(1)} MB) from local deploy folder.`);
+          fs.unlinkSync(p);
+        }
+      } catch (e) {}
+    }
+  }
 }
 
 buildReleases().catch(err => {
