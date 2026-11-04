@@ -846,13 +846,101 @@ window.renderReleasesList = async function() {
   }
 };
 
+function parseGitHubReleaseNotes(body) {
+  if (!body) return [];
+  return body
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(line => line.length > 0)
+    .map(line => line.replace(/^[-*•]\s*/, ''));
+}
+
+async function fetchGitHubReleases() {
+  try {
+    const res = await fetch('https://api.github.com/repos/baboy0715/wintray_page/releases', {
+      headers: { 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!res.ok) return null;
+    const items = await res.json();
+    return Array.isArray(items) && items.length > 0 ? items : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function mergeGitHubReleases(localData, ghItems) {
+  if (!Array.isArray(ghItems) || ghItems.length === 0) return localData;
+
+  const localReleases = (localData && Array.isArray(localData.releases)) ? [...localData.releases] : [];
+  const merged = [];
+
+  for (const gh of ghItems) {
+    const tag = gh.tag_name || '';
+    const rawVer = tag.replace(/^v/i, '');
+    const exeAsset = (gh.assets || []).find(a => a.name && a.name.toLowerCase().endsWith('.exe')) || (gh.assets || [])[0];
+    const dlUrl = exeAsset ? exeAsset.browser_download_url : gh.html_url;
+    const fileName = exeAsset ? exeAsset.name : `WinterTray-Setup-${tag}.exe`;
+    const dateStr = gh.published_at ? gh.published_at.split('T')[0] : '';
+    const changes = parseGitHubReleaseNotes(gh.body);
+
+    const existing = localReleases.find(r => r.rawVersion === rawVer || r.version === tag);
+
+    merged.push({
+      version: tag.startsWith('v') ? tag : `v${tag}`,
+      rawVersion: rawVer,
+      file: fileName,
+      url: dlUrl,
+      date: dateStr || (existing ? existing.date : ''),
+      changes: changes.length > 0 ? changes : (existing ? existing.changes : []),
+      changes_en: (existing && existing.changes_en) ? existing.changes_en : undefined
+    });
+  }
+
+  for (const loc of localReleases) {
+    const already = merged.some(m => m.rawVersion === loc.rawVersion || m.version === loc.version);
+    if (!already) {
+      merged.push(loc);
+    }
+  }
+
+  merged.sort((a, b) => {
+    const partsA = (a.rawVersion || '').split('.').map(Number);
+    const partsB = (b.rawVersion || '').split('.').map(Number);
+    const len = Math.max(partsA.length, partsB.length);
+    for (let i = 0; i < len; i++) {
+      const numA = partsA[i] || 0;
+      const numB = partsB[i] || 0;
+      if (numA !== numB) return numB - numA;
+    }
+    return (b.file || '').localeCompare(a.file || '');
+  });
+
+  return {
+    latest: merged[0] || null,
+    releases: merged
+  };
+}
+
 (async function initReleases() {
+  // 1. Azonnali megjelenítés a helyi gyorsítótárból
   try {
     const response = await fetch('releases/releases.json?v=' + Date.now(), { cache: 'no-cache' });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    cachedReleasesData = await response.json();
-    window.renderReleasesList();
-  } catch (err) {
+    if (response.ok) {
+      cachedReleasesData = await response.json();
+      window.renderReleasesList();
+    }
+  } catch (err) {}
+
+  // 2. Automatikus frissítés a legújabb GitHub Releases API-ból
+  try {
+    const ghItems = await fetchGitHubReleases();
+    if (ghItems && ghItems.length > 0) {
+      cachedReleasesData = mergeGitHubReleases(cachedReleasesData, ghItems);
+      window.renderReleasesList();
+    }
+  } catch (err) {}
+
+  if (!cachedReleasesData) {
     const t = i18n[currentLang];
     const wrapper = document.getElementById('releases-wrapper');
     if (wrapper) wrapper.innerHTML = `<p class="loading-text">${t.noReleasesText}</p>`;
