@@ -892,11 +892,11 @@ h2 {
 
 .feedback-frame-wrapper {
   width: 100%;
-  height: 480px;
+  height: 650px;
   overflow: hidden;
   border-radius: 12px;
-  background: #ffffff;
-  border: 1px solid var(--row-border-hover);
+  background: transparent;
+  border: none;
 }
 
 .feedback-frame-wrapper iframe {
@@ -904,6 +904,7 @@ h2 {
   height: 100%;
   border: none;
   display: block;
+  background: transparent;
 }
 
 .loading-text {
@@ -1141,6 +1142,6 @@ html[data-season="autumn"] .video-backdrop {
   }
 
   .feedback-frame-wrapper {
-    height: 440px;
+    height: 700px;
   }
 }
