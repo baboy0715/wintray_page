@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" data-season="winter" data-lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="meta-title">WinterTray – Winter Theme &amp; Desktop Snow Effect for Windows 10 &amp; 11</title>
-  <meta name="description" id="meta-description" content="Transform your desktop with WinterTray, the ultimate free winter theme and realistic desktop snow app for Windows 10 and 11. Real-time window edge accumulation, icicles, falling leaves, and 120 FPS snowfall. Download free!">
-  <meta name="keywords" content="winter theme windows, windows 11 winter theme, windows 10 winter theme, desktop snow, falling snow on desktop, desktop snow app, windows snow effect, winter desktop atmosphere, teli tema windows, téli téma windows, téli asztal téma, hóesés az asztalon, asztali hóesés program, ablakra tapadó hó, WinterTray, free download">
+  <meta name="description" id="meta-description"
+    content="Transform your desktop with WinterTray, the ultimate free winter theme and realistic desktop snow app for Windows 10 and 11. Real-time window edge accumulation, icicles, falling leaves, and 120 FPS snowfall. Download free!">
+  <meta name="keywords"
+    content="winter theme windows, windows 11 winter theme, windows 10 winter theme, desktop snow, falling snow on desktop, desktop snow app, windows snow effect, winter desktop atmosphere, teli tema windows, téli téma windows, téli asztal téma, hóesés az asztalon, asztali hóesés program, ablakra tapadó hó, WinterTray, free download">
   <meta name="author" content="WinterTray">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" id="meta-theme-color" content="#070d19">
@@ -22,14 +25,17 @@
   <!-- Open Graph / Facebook / Discord preview -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wintray_page.pages.dev/">
-  <meta property="og:title" id="og-title" content="WinterTray – Winter Theme &amp; Desktop Snow Effect for Windows 10 &amp; 11">
-  <meta property="og:description" id="og-description" content="Realistic 120 FPS desktop snowfall, icicles, autumn leaf fall, and rain for Windows 10 & 11. Download the official installer!">
+  <meta property="og:title" id="og-title"
+    content="WinterTray – Winter Theme &amp; Desktop Snow Effect for Windows 10 &amp; 11">
+  <meta property="og:description" id="og-description"
+    content="Realistic 120 FPS desktop snowfall, icicles, autumn leaf fall, and rain for Windows 10 & 11. Download the official installer!">
   <meta property="og:site_name" content="WinterTray">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" id="twitter-title" content="WinterTray – Winter Theme &amp; Desktop Snow for Windows">
-  <meta name="twitter:description" id="twitter-description" content="Realistic 120 FPS desktop snowfall, icicles, autumn leaf fall, and rain for Windows 10 & 11.">
+  <meta name="twitter:description" id="twitter-description"
+    content="Realistic 120 FPS desktop snowfall, icicles, autumn leaf fall, and rain for Windows 10 & 11.">
 
   <!-- Structured data for Google Search (Schema.org JSON-LD) -->
   <script type="application/ld+json">
@@ -107,12 +113,14 @@
 
   <link rel="stylesheet" href="style.css?v=2.8">
 </head>
+
 <body>
   <canvas id="snow-canvas" aria-hidden="true"></canvas>
 
   <!-- Floating feedback pill (bottom right) -->
   <a href="#feedback" class="floating-feedback-pill" id="floating-feedback-link" title="Jump to feedback">
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
     </svg>
     <span id="floating-feedback-text">Feedback / Bug Report</span>
@@ -124,11 +132,13 @@
       <div class="nav-controls">
         <!-- Season Switcher -->
         <div class="season-switcher" role="group" aria-label="Season Switcher">
-          <button type="button" class="season-btn active" data-season-target="winter" onclick="setSeason('winter')" aria-pressed="true">
+          <button type="button" class="season-btn active" data-season-target="winter" onclick="setSeason('winter')"
+            aria-pressed="true">
             <span class="season-icon" aria-hidden="true">❄️</span>
             <span id="season-btn-winter-text">Winter</span>
           </button>
-          <button type="button" class="season-btn" data-season-target="autumn" onclick="setSeason('autumn')" aria-pressed="false">
+          <button type="button" class="season-btn" data-season-target="autumn" onclick="setSeason('autumn')"
+            aria-pressed="false">
             <span class="season-icon" aria-hidden="true">🍂</span>
             <span id="season-btn-autumn-text">Autumn</span>
             <span class="season-new-badge" id="season-btn-new-badge">NEW</span>
@@ -137,7 +147,8 @@
 
         <!-- Language Switcher (Default: English) -->
         <div class="lang-switcher" role="group" aria-label="Language Switcher">
-          <button type="button" class="lang-btn active" data-lang-target="en" onclick="setLanguage('en')" aria-pressed="true">
+          <button type="button" class="lang-btn active" data-lang-target="en" onclick="setLanguage('en')"
+            aria-pressed="true">
             <span class="lang-flag" aria-hidden="true">🇺🇸</span>
             <span>English</span>
           </button>
@@ -152,16 +163,19 @@
     <!-- 1. Hero & Download -->
     <header class="hero card">
       <div class="badge" id="hero-badge">Windows 10 / 11 (64-bit) • Winter & Autumn Edition ❄️</div>
-      <h1 class="hero-title">WinterTray <span class="hero-tagline" id="hero-tagline">– Winter Theme &amp; Desktop Snow for Windows</span></h1>
+      <h1 class="hero-title">WinterTray <span class="hero-tagline" id="hero-tagline">– Winter Theme &amp; Desktop Snow
+          for Windows</span></h1>
       <p class="lead" id="hero-lead">
         The ultimate lightweight winter theme and realistic desktop snow app for Windows 10 and Windows 11.
-        Tracks open windows in real-time, forming natural snow layers and icicles, or falling leaves and raindrops in autumn mode.
+        Tracks open windows in real-time, forming natural snow layers and icicles, or falling leaves and raindrops in
+        autumn mode.
       </p>
 
       <div class="hero-actions-container">
         <div class="hero-buttons">
           <a id="main-download-btn" href="#" class="btn-download" download>
-            <svg class="icon-download" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg class="icon-download" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -169,7 +183,8 @@
             <span id="main-download-text">Download Installer</span>
           </a>
           <a href="#feedback" class="btn-feedback-hero">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
             </svg>
             <span id="hero-feedback-text">Leave Feedback / Report Bug</span>
@@ -181,7 +196,8 @@
 
         <!-- SmartScreen Help Box -->
         <div class="smartscreen-box">
-          <button type="button" class="smartscreen-toggle-btn" id="smartscreen-btn" onclick="toggleSmartScreenHelp()" aria-expanded="false">
+          <button type="button" class="smartscreen-toggle-btn" id="smartscreen-btn" onclick="toggleSmartScreenHelp()"
+            aria-expanded="false">
             <span class="smartscreen-btn-left">
               <span class="smartscreen-icon" aria-hidden="true">🛡️</span>
               <span id="smartscreen-toggle-text">Seeing "Windows protected your PC" blue popup?</span>
@@ -192,13 +208,18 @@
             <div class="smartscreen-inner">
               <div class="smartscreen-badge" id="smartscreen-badge-text">100% Safe &amp; Clean</div>
               <p class="smartscreen-desc" id="smartscreen-desc-text">
-                <strong>WinterTray</strong> is an independent, open-source project. Microsoft Defender SmartScreen automatically displays this blue protection warning for newly released software that does not yet possess an expensive annual corporate code-signing certificate.
+                <strong>WinterTray</strong> is an independent, open-source project. Microsoft Defender SmartScreen
+                automatically displays this blue protection warning for newly released software that does not yet
+                possess an expensive annual corporate code-signing certificate.
               </p>
               <div class="smartscreen-steps-wrap">
-                <span class="smartscreen-steps-title" id="smartscreen-steps-title-text">Quick 2-click solution to start the installation:</span>
+                <span class="smartscreen-steps-title" id="smartscreen-steps-title-text">Quick 2-click solution to start
+                  the installation:</span>
                 <ol class="smartscreen-steps-list">
-                  <li id="smartscreen-step1-text">Click the underlined <strong>"More info"</strong> link in the blue window.</li>
-                  <li id="smartscreen-step2-text">Click the <strong>"Run anyway"</strong> button that appears in the bottom right corner.</li>
+                  <li id="smartscreen-step1-text">Click the underlined <strong>"More info"</strong> link in the blue
+                    window.</li>
+                  <li id="smartscreen-step2-text">Click the <strong>"Run anyway"</strong> button that appears in the
+                    bottom right corner.</li>
                 </ol>
                 <div class="smartscreen-demo-bar">
                   <span class="demo-link" id="smartscreen-demo1-text">1. More info</span>
@@ -226,23 +247,32 @@
       <ul class="feature-list">
         <li>
           <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
-          <span id="feature-item-1"><strong>Winter &amp; Autumn Season Modes:</strong> Seamlessly switch between winter snowfall and cozy autumn atmosphere from the system tray menu, featuring automated desktop wallpaper switching.</span>
+          <span id="feature-item-1"><strong>Winter &amp; Autumn Season Modes:</strong> Seamlessly switch between winter
+            snowfall and cozy autumn atmosphere from the system tray menu, featuring automated desktop wallpaper
+            switching.</span>
         </li>
         <li>
           <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
-          <span id="feature-item-2"><strong>Realistic Leaf Fall &amp; Autumn Rain:</strong> 3 distinct leaf types (birch, oak, maple) across 4 autumn color tones, accompanied by gentle slanted raindrops and ripple splash effects.</span>
+          <span id="feature-item-2"><strong>Realistic Leaf Fall &amp; Autumn Rain:</strong> 3 distinct leaf types
+            (birch, oak, maple) across 4 autumn color tones, accompanied by gentle slanted raindrops and ripple splash
+            effects.</span>
         </li>
         <li>
           <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
-          <span id="feature-item-3"><strong>Realistic 120 FPS Desktop Snow:</strong> Multiple snowflake styles, wind physics, optional snow thickness limit removal, and growing icicles that shatter on click.</span>
+          <span id="feature-item-3"><strong>Realistic 120 FPS Desktop Snow:</strong> Multiple snowflake styles, wind
+            physics, optional snow thickness limit removal, and growing icicles that shatter on click.</span>
         </li>
         <li>
           <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
-          <span id="feature-item-4"><strong>Physical Window Accumulation &amp; Cursor Sweep:</strong> Snow and leaves settle realistically on top of open window frames and the taskbar, scattering when windows move or swept with your mouse cursor.</span>
+          <span id="feature-item-4"><strong>Physical Window Accumulation &amp; Cursor Sweep:</strong> Snow and leaves
+            settle realistically on top of open window frames and the taskbar, scattering when windows move or swept
+            with your mouse cursor.</span>
         </li>
         <li>
           <span class="bullet" data-winter-bullet="❄" data-autumn-bullet="🍂">❄</span>
-          <span id="feature-item-5"><strong>Multi-language &amp; 0% Background Gaming Impact:</strong> English and Hungarian system tray settings, smooth 120 FPS fade-outs, and automatic suspension during full-screen apps and games.</span>
+          <span id="feature-item-5"><strong>Multi-language &amp; 0% Background Gaming Impact:</strong> English and
+            Hungarian system tray settings, smooth 120 FPS fade-outs, and automatic suspension during full-screen apps
+            and games.</span>
         </li>
       </ul>
     </section>
@@ -271,27 +301,36 @@
       <h2 id="faq-heading">Frequently Asked Questions</h2>
       <div class="faq-list">
         <details class="faq-item" open>
-          <summary class="faq-question" id="faq-q1">What makes WinterTray the best winter theme for Windows 10 &amp; 11?</summary>
+          <summary class="faq-question" id="faq-q1">What makes WinterTray the best winter theme for Windows 10 &amp; 11?
+          </summary>
           <div class="faq-answer">
-            <p id="faq-a1">WinterTray transforms your desktop with realistic 120 FPS falling snow, seasonal wallpapers, and interactive physics. Unlike static themes, WinterTray brings your desktop to life with customizable wind, snowflake styles, and autumn atmosphere.</p>
+            <p id="faq-a1">WinterTray transforms your desktop with realistic 120 FPS falling snow, seasonal wallpapers,
+              and interactive physics. Unlike static themes, WinterTray brings your desktop to life with customizable
+              wind, snowflake styles, and autumn atmosphere.</p>
           </div>
         </details>
         <details class="faq-item">
           <summary class="faq-question" id="faq-q2">How does real-time window snow accumulation work?</summary>
           <div class="faq-answer">
-            <p id="faq-a2">WinterTray tracks active desktop windows and taskbars in real time. Snowflakes and falling leaves land and settle on window frames. When you move an application or sweep your mouse cursor across them, the accumulated snow crumbles realistically.</p>
+            <p id="faq-a2">WinterTray tracks active desktop windows and taskbars in real time. Snowflakes and falling
+              leaves land and settle on window frames. When you move an application or sweep your mouse cursor across
+              them, the accumulated snow crumbles realistically.</p>
           </div>
         </details>
         <details class="faq-item">
-          <summary class="faq-question" id="faq-q3">Does this desktop snow app impact gaming or PC performance?</summary>
+          <summary class="faq-question" id="faq-q3">Does this desktop snow app impact gaming or PC performance?
+          </summary>
           <div class="faq-answer">
-            <p id="faq-a3">Not at all! WinterTray is hardware-accelerated with near-zero CPU and RAM footprint. In addition, it features automatic smart suspension when full-screen 3D games or productivity apps are running.</p>
+            <p id="faq-a3">Not at all! WinterTray is hardware-accelerated with near-zero CPU and RAM footprint. In
+              addition, it features automatic smart suspension when full-screen 3D games or productivity apps are
+              running.</p>
           </div>
         </details>
         <details class="faq-item">
           <summary class="faq-question" id="faq-q4">Is WinterTray free and safe to download?</summary>
           <div class="faq-answer">
-            <p id="faq-a4">Yes! WinterTray is completely free, lightweight, and contains zero ads, telemetry, or bloatware. Download the official installer (.exe) directly from our releases section.</p>
+            <p id="faq-a4">Yes! WinterTray is completely free, lightweight, and contains zero ads, telemetry, or
+              bloatware. Download the official installer (.exe) directly from our releases section.</p>
           </div>
         </details>
       </div>
@@ -304,7 +343,8 @@
           <span class="badge feedback-badge" id="feedback-badge-text">Your Feedback Matters!</span>
           <h2 id="feedback-heading">Feedback &amp; Bug Report</h2>
         </div>
-        <a href="https://qform.hu/form/wintertray-visszajelzes-funkcioertekeles-es-hibabejelentes-2" target="_blank" rel="noopener" class="feedback-external-link" id="feedback-external-link">
+        <a href="https://qform.hu/form/wintertray-visszajelzes-funkcioertekeles-es-hibabejelentes-2" target="_blank"
+          rel="noopener" class="feedback-external-link" id="feedback-external-link">
           Open in new tab ↗
         </a>
       </div>
@@ -312,21 +352,21 @@
         Please share your impressions, suggest new features, or report any bugs to help us make WinterTray even better!
       </p>
       <div class="feedback-frame-wrapper">
-          <iframe src="https://qform.hu/form/wintertray-visszajelzes-funkcioertekeles-es-hibabejelentes-2?embed=true&theme=dark&transparent=true&hide_header=true&hide_title=true&accent=06b6d4"
-                  width="100%"
-                  height="620"
-                  frameborder="0"
-                  title="WinterTray feedback form"
-                  style="border-radius: 12px; border: none; background: transparent;">
-          </iframe>
+        <iframe
+          src="https://qform.hu/form/wintertray-visszajelzes-funkcioertekeles-es-hibabejelentes-2?embed=true&theme=dark&transparent=true&hide_title=true"
+          width="100%" height="650" frameborder="0" marginheight="0" marginwidth="0"
+          style="border-radius: 12px; border: none; background: transparent;"
+          allow="clipboard-write">Betöltés...</iframe>
       </div>
     </section>
 
     <footer class="footer">
-      <p id="footer-text">WinterTray &middot; Free Winter Theme &amp; Desktop Snow Application for Windows 10 &amp; 11</p>
+      <p id="footer-text">WinterTray &middot; Free Winter Theme &amp; Desktop Snow Application for Windows 10 &amp; 11
+      </p>
     </footer>
   </main>
 
   <script src="script.js?v=2.8"></script>
 </body>
+
 </html>
