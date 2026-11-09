@@ -26,16 +26,17 @@ let currentLang = safeGetStorage('wintertray_lang', 'en');
 
 const i18n = {
   en: {
-    pageTitle: 'WinterTray – Winter Desktop Snow & Autumn Leaves for Windows 10 & 11',
-    metaDesc: 'Lightweight system tray desktop snow and autumn atmosphere app for Windows 10 and Windows 11. Real-time window edge accumulation, icicles, falling leaves, and rain. Download free!',
-    ogTitle: 'WinterTray – Winter Desktop Snow & Autumn Leaves for Windows 10 & 11',
+    pageTitle: 'WinterTray – Winter Theme & Desktop Snow Effect for Windows 10 & 11',
+    metaDesc: 'Transform your desktop with WinterTray, the ultimate free winter theme and realistic desktop snow app for Windows 10 and 11. Real-time window edge accumulation, icicles, falling leaves, and 120 FPS snowfall. Download free!',
+    ogTitle: 'WinterTray – Winter Theme & Desktop Snow Effect for Windows 10 & 11',
     ogDesc: 'Realistic 120 FPS desktop snowfall, icicles, autumn leaf fall, and rain for Windows 10 & 11. Download the official installer!',
     seasonWinter: 'Winter',
     seasonAutumn: 'Autumn',
     seasonNewBadge: 'NEW',
     heroBadgeWinter: 'Windows 10 / 11 (64-bit) • Winter & Autumn Edition ❄️',
     heroBadgeAutumn: 'Windows 10 / 11 (64-bit) • Autumn & Winter Edition 🍂',
-    heroLead: 'Lightweight system tray winter and autumn desktop atmosphere app for Windows 10 and Windows 11. Tracks open windows in real-time, forming natural snow layers and icicles, or falling leaves and raindrops in autumn mode.',
+    heroTagline: '– Winter Theme & Desktop Snow for Windows',
+    heroLead: 'The ultimate lightweight winter theme and realistic desktop snow app for Windows 10 and Windows 11. Tracks open windows in real-time, forming natural snow layers and icicles, or falling leaves and raindrops in autumn mode.',
     downloadBtn: 'Download Installer',
     feedbackHeroBtn: 'Leave Feedback / Report Bug',
     versionPrefix: 'Latest:',
@@ -69,12 +70,21 @@ const i18n = {
     specRuntimeValue: '.NET 8.0 (Built-in Self-Contained, no extra install needed)',
     specResourceLabel: 'Resource Usage',
     specResourceValue: 'Minimal CPU/GPU usage (Hardware accelerated)',
+    faqHeading: 'Frequently Asked Questions',
+    faqQ1: 'What makes WinterTray the best winter theme for Windows 10 & 11?',
+    faqA1: 'WinterTray transforms your desktop with realistic 120 FPS falling snow, seasonal wallpapers, and interactive physics. Unlike static themes, WinterTray brings your desktop to life with customizable wind, snowflake styles, and autumn atmosphere.',
+    faqQ2: 'How does real-time window snow accumulation work?',
+    faqA2: 'WinterTray tracks active desktop windows and taskbars in real time. Snowflakes and falling leaves land and settle on window frames. When you move an application or sweep your mouse cursor across them, the accumulated snow crumbles realistically.',
+    faqQ3: 'Does this desktop snow app impact gaming or PC performance?',
+    faqA3: 'Not at all! WinterTray is hardware-accelerated with near-zero CPU and RAM footprint. In addition, it features automatic smart suspension when full-screen 3D games or productivity apps are running.',
+    faqQ4: 'Is WinterTray free and safe to download?',
+    faqA4: 'Yes! WinterTray is completely free, lightweight, and contains zero ads, telemetry, or bloatware. Download the official installer (.exe) directly from our releases section.',
     feedbackBadge: 'Your Feedback Matters!',
     feedbackHeading: 'Feedback & Bug Report',
     feedbackOpenNewTab: 'Open in new tab ↗',
     feedbackIntro: 'Please share your impressions, suggest new features, or report any bugs to help us make WinterTray even better!',
     floatingFeedbackText: 'Feedback / Bug Report',
-    footerText: 'WinterTray · Winter & Autumn Windows Desktop Atmosphere Application',
+    footerText: 'WinterTray · Free Winter Theme & Desktop Snow Application for Windows 10 & 11',
     videoTitle: 'WinterTray – Showcase & Installation Guide',
     videoHeroBtn: 'Video Demo',
     videoMinimizeTitle: 'Minimize to corner',
@@ -82,16 +92,17 @@ const i18n = {
     videoCloseTitle: 'Close video'
   },
   hu: {
-    pageTitle: 'WinterTray – Téli hóesés és Őszi falevélhullás Windows 10 és 11 rendszerekre',
-    metaDesc: 'Könnyed, tálcáról futó téli és őszi asztali hangulat-alkalmazás Windows 10 és Windows 11 rendszerekre. Valós időben követi a nyitott ablakokat természetes hóréteggel, jégcsapokkal, hulló falevelekkel és esővel.',
-    ogTitle: 'WinterTray – Téli hóesés és Őszi falevélhullás Windows 10 és 11 rendszerekre',
+    pageTitle: 'WinterTray – Téli téma és asztali hóesés Windows 10 és 11 rendszerekre',
+    metaDesc: 'Varázsolj valódi téli hangulatot a gépedre a WinterTray-jel: ingyenes téli téma és asztali hóesés program Windows 10 és 11 rendszerekre. Ablakokra tapadó hóréteg, jégcsapok és 120 FPS havazás. Töltsd le ingyen!',
+    ogTitle: 'WinterTray – Téli téma és asztali hóesés Windows 10 és 11 rendszerekre',
     ogDesc: 'Valósághű, 120 FPS-es asztali hóesés, jégcsapok, valamint őszi falevélhullás és esőzés Windows 10 és 11-re. Töltsd le a hivatalos telepítőt!',
     seasonWinter: 'Tél',
     seasonAutumn: 'Ősz',
     seasonNewBadge: 'ÚJ',
     heroBadgeWinter: 'Windows 10 / 11 (64-bit) • Téli és Őszi kiadás ❄️',
     heroBadgeAutumn: 'Windows 10 / 11 (64-bit) • Őszi és Téli kiadás 🍂',
-    heroLead: 'Könnyed, tálcáról (system tray) futó téli és őszi asztali hangulat-alkalmazás Windows 10 és Windows 11 rendszerekre. Valós időben követi a nyitott ablakokat, amelyek tetején természetes hóréteg és jégcsapok, vagy őszi módban hulló falevelek és esőcseppek képződnek.',
+    heroTagline: '– Téli téma és asztali hóesés Windowsra',
+    heroLead: 'A legújabb könnyed, ingyenes téli téma és asztali hóesés program Windows 10 és Windows 11 rendszerekre. Valós időben követi a nyitott ablakokat, amelyek peremén természetes hóréteg és jégcsapok, vagy őszi módban hulló falevelek és esőcseppek képződnek.',
     downloadBtn: 'Telepítő letöltése',
     feedbackHeroBtn: 'Véleményt írok / Hibát jelentek',
     versionPrefix: 'Legújabb:',
@@ -125,12 +136,21 @@ const i18n = {
     specRuntimeValue: '.NET 8.0 (Beépítve a telepítőbe, nem igényel külön telepítést)',
     specResourceLabel: 'Erőforrásigény',
     specResourceValue: 'Minimális CPU/GPU használat (hardveresen gyorsított megjelenítés)',
+    faqHeading: 'Gyakran Ismételt Kérdések (GYIK)',
+    faqQ1: 'Miért a WinterTray a legjobb téli téma Windows 10 és 11 rendszerekre?',
+    faqA1: 'A WinterTray egy kifejezetten Windowsra tervezett téli téma és asztali hóesés program. 120 FPS simaságú hóhullást, ablakok peremén megülő havat és jégcsapokat varázsol a képernyődre anélkül, hogy leterhelné a gépedet vagy a játékaidat.',
+    faqQ2: 'Hogyan működik az ablakokra tapadó hó és a lesöprés?',
+    faqA2: 'A program valós időben érzékeli a nyitott ablakok kereteit és a tálcát. A lehulló hópelyhek fizikai réteget képeznek rajtuk, ablakmozgatáskor lehullanak, az egérkurzorral pedig lesöpörhetők.',
+    faqQ3: 'Lassítja a játékokat vagy növeli a gép fogyasztását a hóesés effekt?',
+    faqA3: 'Egyáltalán nem! A WinterTray hardveresen gyorsított, szinte észrevehetetlen CPU és RAM használattal működik. Ráadásul teljes képernyős játékok vagy alkalmazások alatt automatikusan szünetelteti az animációt.',
+    faqQ4: 'Ingyenes és biztonságos a letöltés?',
+    faqA4: 'Igen! A WinterTray 100%-ban ingyenes, tiszta szoftver, semmilyen reklámot vagy felesleges háttérfolyamatot nem tartalmaz. A telepítő (.exe) közvetlenül letölthető a fenti szekcióból.',
     feedbackBadge: 'Fontos a véleményed!',
     feedbackHeading: 'Visszajelzés és Hibabejelentés',
     feedbackOpenNewTab: 'Megnyitás külön lapon ↗',
     feedbackIntro: 'Kérlek, oszd meg a tapasztalataidat, ötleteidet vagy jelentsd be a hibákat, hogy még jobbá tehessük a WinterTray-t!',
     floatingFeedbackText: 'Vélemény / Hibabejelentés',
-    footerText: 'WinterTray · Téli és őszi Windows asztali hangulat-alkalmazás',
+    footerText: 'WinterTray · Ingyenes téli téma és asztali hóesés Windows 10 és 11 rendszerekre',
     videoTitle: 'WinterTray – Bemutató és Letöltési Útmutató',
     videoHeroBtn: 'Videó bemutató',
     videoMinimizeTitle: 'Kicsinyítés a sarokba',
@@ -177,6 +197,8 @@ window.setLanguage = function(lang) {
   if (heroBadge) {
     heroBadge.textContent = currentSeason === 'autumn' ? t.heroBadgeAutumn : t.heroBadgeWinter;
   }
+  const heroTag = document.getElementById('hero-tagline');
+  if (heroTag && t.heroTagline) heroTag.textContent = t.heroTagline;
   const heroLead = document.getElementById('hero-lead');
   if (heroLead) heroLead.textContent = t.heroLead;
   const mainDlText = document.getElementById('main-download-text');
@@ -235,6 +257,26 @@ window.setLanguage = function(lang) {
   if (spResL) spResL.textContent = t.specResourceLabel;
   const spResV = document.getElementById('spec-resource-value');
   if (spResV) spResV.textContent = t.specResourceValue;
+
+  // Gyakran Ismételt Kérdések (FAQ)
+  const faqHead = document.getElementById('faq-heading');
+  if (faqHead && t.faqHeading) faqHead.textContent = t.faqHeading;
+  const fq1 = document.getElementById('faq-q1');
+  if (fq1 && t.faqQ1) fq1.textContent = t.faqQ1;
+  const fa1 = document.getElementById('faq-a1');
+  if (fa1 && t.faqA1) fa1.textContent = t.faqA1;
+  const fq2 = document.getElementById('faq-q2');
+  if (fq2 && t.faqQ2) fq2.textContent = t.faqQ2;
+  const fa2 = document.getElementById('faq-a2');
+  if (fa2 && t.faqA2) fa2.textContent = t.faqA2;
+  const fq3 = document.getElementById('faq-q3');
+  if (fq3 && t.faqQ3) fq3.textContent = t.faqQ3;
+  const fa3 = document.getElementById('faq-a3');
+  if (fa3 && t.faqA3) fa3.textContent = t.faqA3;
+  const fq4 = document.getElementById('faq-q4');
+  if (fq4 && t.faqQ4) fq4.textContent = t.faqQ4;
+  const fa4 = document.getElementById('faq-a4');
+  if (fa4 && t.faqA4) fa4.textContent = t.faqA4;
 
   // Visszajelzés kártya
   const fbBadge = document.getElementById('feedback-badge-text');
